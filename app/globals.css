@@ -37,8 +37,9 @@ a {
 }
 .site-header {
   align-items: center;
-  border-bottom: 1px solid var(--line);
-  background: var(--background);
+  border-bottom: 1px solid rgba(245, 236, 221, 0.18);
+  background: #1d2524;
+  color: #f5ecdd;
   display: flex;
   height: 92px;
   justify-content: space-between;
@@ -89,6 +90,9 @@ a {
   letter-spacing: 0.13em;
   text-transform: uppercase;
 }
+.site-header .brand-copy span {
+  color: #b8c5c1;
+}
 .desktop-nav {
   display: flex;
   gap: clamp(18px, 3vw, 52px);
@@ -101,7 +105,9 @@ a {
   transition: color 0.2s ease;
 }
 .desktop-nav a:hover,
-.footer-links a:hover,
+.footer-links a:hover {
+  color: #e7bc50;
+}
 .text-link:hover {
   color: var(--red);
 }
@@ -139,7 +145,7 @@ a {
 }
 .header-search input::placeholder,
 .drawer-search input::placeholder {
-  color: var(--ink-muted);
+  color: #b8c5c1;
 }
 .header-search button,
 .drawer-search button {
@@ -192,65 +198,6 @@ main {
   max-width: 1440px;
   padding-top: 92px;
 }
-.inner-page-hero {
-  border-bottom: 1px solid var(--line);
-  padding: 120px 11vw 105px;
-}
-.inner-page-hero h1 {
-  margin-bottom: 30px;
-  max-width: 760px;
-}
-.inner-page-hero .hero-summary {
-  max-width: 410px;
-}
-.books-page-list {
-  padding-bottom: 105px;
-  padding-top: 105px;
-}
-.book-item h2 {
-  font-family: Georgia, serif;
-  font-size: 24px;
-  font-weight: 400;
-  margin-bottom: 8px;
-}
-.books-page-quote {
-  margin: 0;
-}
-.contact-hero {
-  padding-bottom: 120px;
-}
-.contact-grid {
-  border-bottom: 1px solid var(--line);
-  display: grid;
-  gap: 8vw;
-  grid-template-columns: 1fr 1fr;
-  padding: 105px 11vw 130px;
-}
-.contact-email {
-  display: inline-block;
-  font-family: Georgia, serif;
-  font-size: clamp(25px, 3vw, 42px);
-  margin-top: 28px;
-}
-.contact-copy {
-  color: var(--ink-muted);
-  font-size: 15px;
-  line-height: 1.8;
-  margin: 28px 0 0;
-  max-width: 390px;
-}
-.contact-grid .text-link {
-  margin-top: 30px;
-}
-.hero-section {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(360px, 43%);
-  min-height: 630px;
-}
-.hero-intro {
-  align-self: center;
-  padding: 9vw 8vw 9vw 11vw;
-}
 .eyebrow {
   color: var(--red);
   margin: 0 0 28px;
@@ -274,12 +221,6 @@ h1 em {
   color: var(--red);
   font-style: italic;
 }
-.hero-summary {
-  color: var(--ink-muted);
-  font-size: 15px;
-  line-height: 1.7;
-  max-width: 350px;
-}
 .text-link {
   border-bottom: 1px solid var(--foreground);
   display: inline-flex;
@@ -289,174 +230,20 @@ h1 em {
   padding-bottom: 8px;
   transition: color 0.2s ease;
 }
-.hero-portrait {
-  background: var(--blue);
-  min-height: 630px;
-  overflow: hidden;
-  position: relative;
-}
-.portrait-sun {
-  background: var(--yellow);
-  border-radius: 50%;
-  height: min(28vw, 430px);
-  left: 12%;
-  position: absolute;
-  top: 10%;
-  width: min(28vw, 430px);
-}
-.portrait-figure {
-  background: var(--red);
-  border-radius: 47% 47% 0 0;
-  bottom: -8%;
-  height: 76%;
-  left: 34%;
-  position: absolute;
-  transform: rotate(7deg);
-  width: 50%;
-}
-.portrait-shadow {
-  background: #0e3440;
-  border-radius: 50% 50% 0 0;
-  bottom: -6%;
-  height: 64%;
-  left: 43%;
-  position: absolute;
-  transform: rotate(-11deg);
-  width: 44%;
-}
-.hero-portrait span {
-  bottom: 28px;
-  color: #f5ecdd;
-  font-size: 10px;
-  left: 30px;
-  letter-spacing: 0.15em;
-  position: absolute;
-}
-.intro-band {
-  border-bottom: 1px solid var(--line);
-  border-top: 1px solid var(--line);
-  display: grid;
-  gap: 5vw;
-  grid-template-columns: 1fr 2fr;
-  padding: 105px 11vw;
-}
 .section-index {
   margin: 5px 0;
 }
-.intro-band h2,
-.books-section h2 {
-  font-family: Georgia, serif;
-  font-size: clamp(36px, 4vw, 58px);
-  font-weight: 400;
-  letter-spacing: -0.05em;
-  line-height: 0.98;
-  margin-bottom: 24px;
-}
-.intro-band h2 {
-  max-width: 500px;
-}
-.intro-band div p {
-  color: var(--ink-muted);
-  font-size: 15px;
-  line-height: 1.8;
-  max-width: 420px;
-}
-.books-section {
-  padding: 105px 11vw 120px;
-}
-.section-heading {
-  align-items: end;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 58px;
-}
-.section-heading .section-index {
-  margin-bottom: 15px;
-}
-.section-heading h2 {
-  margin: 0;
-}
-.book-list {
-  border-top: 1px solid var(--line);
-}
-.book-item {
-  align-items: center;
-  border-bottom: 1px solid var(--line);
-  display: grid;
-  gap: 30px;
-  grid-template-columns: 60px 100px 1fr 30px;
-  padding: 24px 0;
-}
-.book-year,
-.book-item p {
-  color: var(--ink-muted);
-  font-size: 12px;
-}
-.book-cover {
-  align-items: end;
-  display: flex;
-  height: 124px;
-  justify-content: center;
-  padding: 13px;
-  width: 100px;
-}
-.book-cover span {
-  color: #fff5e7;
-  font-family: Georgia, serif;
-  font-size: 15px;
-  line-height: 0.95;
-}
-.book-cover-red {
-  background: var(--red);
-}
-.book-cover-blue {
-  background: var(--blue);
-}
-.book-item h3 {
-  font-family: Georgia, serif;
-  font-size: 24px;
-  font-weight: 400;
-  margin-bottom: 8px;
-}
-.book-item p {
-  margin: 0;
-}
-.book-arrow {
-  font-size: 20px;
-  justify-self: end;
-}
-.quote-section {
-  background: var(--yellow);
-  padding: 100px 16vw 110px;
-  text-align: center;
-}
-.quote-mark {
-  font-family: Georgia, serif;
-  font-size: 64px;
-  line-height: 0.4;
-}
-blockquote {
-  font-family: Georgia, serif;
-  font-size: clamp(30px, 4vw, 56px);
-  letter-spacing: -0.045em;
-  line-height: 1.03;
-  margin: 30px auto;
-  max-width: 780px;
-}
-cite {
-  font-size: 10px;
-  font-style: normal;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
 .site-footer {
   align-items: end;
-  background: var(--blue);
+  background: #16404d;
   color: #f5ecdd;
   display: grid;
   gap: 30px;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1.2fr 1.5fr 1fr 1fr;
   padding: 58px 5.5vw;
+}
+.site-footer a:hover {
+  color: #e7bc50;
 }
 .site-footer a {
   display: block;
@@ -468,6 +255,20 @@ cite {
   color: #b8c5c1;
   font-size: 11px;
   justify-self: center;
+  margin: 0;
+}
+.footer-nav {
+  display: grid;
+  gap: 10px 20px;
+  grid-template-columns: repeat(2, max-content);
+}
+.footer-nav .footer-kicker {
+  grid-column: 1 / -1;
+  margin-bottom: 3px;
+}
+.footer-nav a {
+  font-family: var(--font-geist-sans);
+  font-size: 11px;
   margin: 0;
 }
 .footer-links {
@@ -594,108 +395,12 @@ cite {
     font-size: 11px;
     margin: 24px 0 0;
   }
-  .hero-section {
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
-  }
-  .inner-page-hero {
-    padding: 72px 25px 65px;
-  }
-  .inner-page-hero h1 {
-    font-size: clamp(52px, 17vw, 82px);
-  }
-  .books-page-list {
-    padding: 72px 25px 80px;
-  }
-  .book-item h2 {
-    font-size: 18px;
-  }
-  .contact-hero {
-    padding-bottom: 70px;
-  }
-  .contact-grid {
-    display: block;
-    padding: 72px 25px 85px;
-  }
-  .contact-grid > div + div {
-    margin-top: 72px;
-  }
-  .contact-email {
-    font-size: 27px;
-  }
-  .hero-intro {
-    padding: 72px 25px 65px;
-  }
-  h1 {
-    font-size: clamp(52px, 17vw, 82px);
-    margin-bottom: 28px;
-  }
-  .hero-summary {
-    font-size: 14px;
-  }
-  .hero-portrait {
-    min-height: 390px;
-  }
-  .portrait-sun {
-    height: 280px;
-    width: 280px;
-  }
-  .intro-band {
-    display: block;
-    padding: 72px 25px;
-  }
-  .intro-band .section-index {
-    margin-bottom: 55px;
-  }
-  .intro-band h2,
-  .books-section h2 {
-    font-size: 43px;
-  }
-  .section-heading {
-    align-items: start;
-    display: block;
-    margin-bottom: 38px;
-  }
-  .section-heading h2 {
-    margin-top: 50px;
-  }
-  .books-section {
-    padding: 72px 25px 80px;
-  }
-  .book-item {
-    gap: 16px;
-    grid-template-columns: 35px 74px 1fr 15px;
-    padding: 18px 0;
-  }
-  .book-cover {
-    height: 100px;
-    padding: 9px;
-    width: 74px;
-  }
-  .book-cover span {
-    font-size: 12px;
-  }
-  .book-item h3 {
-    font-size: 18px;
-  }
-  .book-item p {
-    font-size: 11px;
-    line-height: 1.4;
-  }
-  .book-year {
-    align-self: start;
-    padding-top: 5px;
-  }
-  .quote-section {
-    padding: 75px 25px 80px;
-  }
-  blockquote {
-    font-size: 38px;
-  }
   .site-footer {
     display: block;
     padding: 48px 25px;
+  }
+  .footer-nav {
+    margin-top: 48px;
   }
   .site-footer p {
     margin: 52px 0 30px;
