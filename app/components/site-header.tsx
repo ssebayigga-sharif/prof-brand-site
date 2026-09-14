@@ -1,12 +1,13 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
 
 const navigation = [
   { label: "About", href: "/#about" },
   { label: "Books", href: "/books" },
-  { label: "Writing", href: "/#writing" },
+  { label: "Writing", href: "/writing" },
   { label: "Speaking", href: "/speaking" },
   { label: "Contact", href: "/contact" },
 ];
@@ -17,17 +18,19 @@ export default function SiteHeader() {
   return (
     <>
       <header className="site-header">
-        <Link
-          className="brand"
-          href="/"
-          aria-label="Dr. David Daniel Nsereko home"
-        >
-          <span className="brand-mark">DN</span>
-          <span className="brand-copy">
-            <strong>David Daniel Nsereko</strong>
-            <span>Professor &amp; author</span>
-          </span>
+        <Link className="brand" href="/" aria-label="Dr. David Daniel Nsereko">
+          <Image
+            className={`menu-icon ${menuOpen ? "is-open" : ""}`}
+            src="/prof.png"
+            alt=""
+            width={50}
+            height={50}
+          />
         </Link>
+        <span className="brand-copy">
+          <strong>David Daniel Nsereko</strong>
+          <span>Professor, author &amp; Judge</span>
+        </span>
 
         <nav className="desktop-nav" aria-label="Main navigation">
           {navigation.map((item) => (
@@ -59,10 +62,8 @@ export default function SiteHeader() {
           onClick={() => setMenuOpen((open) => !open)}
         >
           <span className="menu-button-label">Menu</span>
-          <span
-            className={`menu-icon ${menuOpen ? "is-open" : ""}`}
-            aria-hidden="true"
-          >
+          <span className="menu-glyph" aria-hidden="true">
+            <span />
             <span />
             <span />
           </span>

@@ -12,7 +12,7 @@ export default function SiteFooter() {
         <Link href="/">Home</Link>
         <Link href="/#about">About</Link>
         <Link href="/books">Books</Link>
-        <Link href="/#writing">Writing</Link>
+        <Link href="/writing">Writing</Link>
         <Link href="/speaking">Speaking</Link>
         <Link href="/contact">Contact</Link>
         <Link href="/search">Search</Link>

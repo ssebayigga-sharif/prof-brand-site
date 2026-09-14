@@ -15,9 +15,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Amara Okafor | Professor & Author",
+  title: "Daniel David Ntanda Nsereko | Professor & Author",
   description:
-    "The books, ideas, and work of professor and author Amara Okafor.",
+    "The books, ideas, and work of Professor Daniel David Ntanda Nsereko.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
