@@ -51,8 +51,9 @@ const EDUCATION: EducationEntry[] = [
 
 export default function Home() {
   return (
-    <main className="bg-[#f7f4ee] text-[#17201f]" id="about">
-      <section className="bg-[#17201f] text-[#fff8ed]">
+    <main className="bg-white text-[#17201f]" id="about">
+      <section className="emblem bg-[#17201f] text-[#fff8ed]">
+        <div aria-hidden="true" className="emblem-mark" />
         <div className="grid min-h-[calc(100svh-168px)] items-center gap-10 px-6 py-10 sm:px-10 sm:py-12 lg:grid-cols-[minmax(0,1fr)_minmax(320px,420px)] lg:px-[5.5vw] lg:py-14">
           <div className="max-w-4xl">
             <p className="mb-5 text-xs font-semibold uppercase text-[#e6c66a]">
@@ -85,13 +86,13 @@ export default function Home() {
 
           <div className="justify-self-center lg:justify-self-end">
             <figure className="max-w-82.5">
-              <div className="relative aspect-4/5 overflow-hidden rounded-sm border border-[#fff8ed]/20 bg-[#24312f] shadow-[0_24px_60px_rgba(0,0,0,0.32)]">
+              <div className="group relative aspect-4/5 overflow-hidden rounded-sm border border-[#fff8ed]/20 bg-[#24312f] shadow-[0_24px_60px_rgba(0,0,0,0.32)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_34px_76px_rgba(0,0,0,0.42)]">
                 <Image
                   src="/prof.png"
                   alt="Judge Daniel David Ntanda Nsereko"
                   fill
                   priority
-                  className="object-cover object-top"
+                  className="object-cover object-top transition duration-700 ease-out group-hover:scale-105"
                   sizes="(max-width: 1024px) 76vw, 330px"
                 />
               </div>
@@ -104,7 +105,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-b border-[#d9d1c4] bg-[#fffaf2] px-6 sm:px-10 lg:px-[5.5vw]">
+      <section className="border-b border-[#d9d1c4] bg-(--surface-alt) px-6 sm:px-10 lg:px-[5.5vw]">
         <div className="grid divide-y divide-[#d9d1c4] sm:grid-cols-3 sm:divide-x sm:divide-y-0">
           <div className="py-6 sm:pr-8">
             <strong className="font-serif text-4xl font-normal text-[#17201f]">
@@ -134,7 +135,7 @@ export default function Home() {
       </section>
 
       <section
-        className="grid gap-10 bg-[#f7f4ee] px-6 py-16 sm:px-10 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16 lg:px-[5.5vw] lg:py-24"
+        className="grid gap-10 bg-white px-6 py-16 sm:px-10 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16 lg:px-[5.5vw] lg:py-24"
         aria-labelledby="about-heading"
       >
         <p className="text-xs font-semibold uppercase text-[#66706b]">
@@ -165,7 +166,7 @@ export default function Home() {
 
       <section
         id="career"
-        className="grid gap-10 bg-[#ebe5da] px-6 py-16 sm:px-10 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16 lg:px-[5.5vw] lg:py-24"
+        className="parchment grid gap-10 px-6 py-16 sm:px-10 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16 lg:px-[5.5vw] lg:py-24"
         aria-labelledby="career-heading"
       >
         <div>
@@ -200,15 +201,16 @@ export default function Home() {
       </section>
 
       <section
-        className="grid gap-10 bg-[#16404d] px-6 py-16 text-[#fff8ed] sm:px-10 lg:grid-cols-[minmax(280px,420px)_minmax(0,1fr)] lg:gap-16 lg:px-[5.5vw] lg:py-24"
+        className="emblem grid gap-10 bg-[#16404d] px-6 py-16 text-[#fff8ed] sm:px-10 lg:grid-cols-[minmax(280px,420px)_minmax(0,1fr)] lg:gap-16 lg:px-[5.5vw] lg:py-24"
         aria-labelledby="books-heading"
       >
-        <div className="relative aspect-3/4 overflow-hidden rounded-sm border border-[#fff8ed]/15 bg-[#24385e] shadow-[0_18px_46px_rgba(0,0,0,0.22)]">
+        <div aria-hidden="true" className="emblem-mark" />
+        <div className="group relative aspect-3/4 overflow-hidden rounded-sm border border-[#fff8ed]/15 bg-[#24385e] shadow-[0_18px_46px_rgba(0,0,0,0.22)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_26px_58px_rgba(0,0,0,0.3)]">
           <Image
             src="/author.png"
             alt="Cover of To The Hague from Nabinene"
             fill
-            className="object-cover object-top"
+            className="object-cover object-top transition duration-700 ease-out group-hover:scale-105"
             sizes="(max-width: 1024px) 88vw, 420px"
           />
         </div>
@@ -237,10 +239,14 @@ export default function Home() {
       </section>
 
       <section
-        className="grid gap-10 bg-[#fffaf2] px-6 py-16 sm:px-10 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16 lg:px-[5.5vw] lg:py-24"
+        className="grid gap-10 bg-(--surface-alt) px-6 py-16 sm:px-10 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16 lg:px-[5.5vw] lg:py-24"
         aria-labelledby="education-heading"
       >
         <div>
+          <span
+            aria-hidden="true"
+            className="mb-5 block h-0.5 w-12 bg-[#cfb878]"
+          />
           <p className="text-xs font-semibold uppercase text-[#66706b]">
             04 / Foundation
           </p>
@@ -264,9 +270,10 @@ export default function Home() {
       </section>
 
       <section
-        className="bg-[#8e352f] px-6 py-16 text-[#fff8ed] sm:px-10 lg:px-[5.5vw] lg:py-24"
+        className="emblem bg-[#8e352f] px-6 py-16 text-[#fff8ed] sm:px-10 lg:px-[5.5vw] lg:py-24"
         aria-label="Profile conclusion"
       >
+        <div aria-hidden="true" className="emblem-mark" />
         <p className="text-xs font-semibold uppercase text-[#f4d0c3]">
           An enduring record
         </p>

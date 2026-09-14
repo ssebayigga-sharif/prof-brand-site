@@ -1,7 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f4f0e9;
+  --background: #ffffff;
+  --surface: #f3ede3;
+  --surface-alt: #faf6ef;
   --foreground: #1d2524;
   --ink-muted: #68706a;
   --line: #d7d1c6;
@@ -166,7 +168,7 @@ a {
     padding-top: 72px;
   }
   align-items: end;
-  background: #f4f0e9;
+  background: var(--background);
   display: grid;
   gap: 7vw;
   grid-template-columns: minmax(0, 1.55fr) minmax(190px, 0.45fr);
@@ -225,7 +227,7 @@ a {
 }
 .profile-career,
 .profile-works {
-  background: #e8e2d8;
+  background: var(--surface);
 }
 .profile-section-heading h2 {
   margin-top: 28px;
@@ -385,7 +387,7 @@ a {
   max-width: 620px;
 }
 .writing-books {
-  background: #e8e2d8;
+  background: var(--surface);
 }
 .writing-book-list {
   border-top: 1px solid #cfc7ba;
@@ -844,4 +846,32 @@ h1 em {
     align-items: start;
     text-align: left;
   }
+}
+/* ---- Accent surface treatments ---- */
+
+/* Warm parchment surface with a subtle paper-grain texture. */
+.parchment {
+  background-color: var(--surface);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0.3 0 0 0 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+/* Faint line-drawn open-book watermark for the dark accent sections. */
+.emblem {
+  isolation: isolate;
+  position: relative;
+}
+.emblem-mark {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 260 260' fill='none'%3E%3Cg stroke='%23fff8ed' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M130 52 C104 76 70 84 40 84 V 222 C70 222 104 216 130 192 C156 216 190 222 220 222 V 84 C190 84 156 76 130 52 Z'/%3E%3Cpath d='M130 53 V 192'/%3E%3Cpath d='M80 116 V 172'/%3E%3Cpath d='M102 110 V 178'/%3E%3Cpath d='M158 110 V 178'/%3E%3Cpath d='M180 116 V 172'/%3E%3C/g%3E%3C/svg%3E");
+  background-position: right bottom;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 100%;
+  opacity: 0.08;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: min(46vw, 420px);
+  z-index: -1;
 }
