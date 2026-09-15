@@ -8,10 +8,10 @@ import {
 } from "@/app/lib/contact/topics";
 
 const labelClasses =
-  "mb-1.5 block text-[10px] uppercase tracking-[0.13em] text-[var(--ink-muted)]";
+  "mb-1.5 block text-xs font-semibold uppercase tracking-[0.14em] text-[#66706b]";
 
 const fieldClasses =
-  "w-full rounded-none border border-[var(--line)] bg-transparent px-3 py-2.5 text-sm text-[var(--foreground)] outline-none transition-colors placeholder:text-[var(--ink-muted)] focus:border-[var(--red)]";
+  "w-full rounded-md border border-[#d9d1c4] bg-white px-4 py-3 text-sm text-[#17201f] outline-none transition placeholder:text-[#a9b8b3] focus:border-[#c64e38] focus:ring-2 focus:ring-[#c64e38]/20";
 
 export default function ContactForm({ topics }: { topics: ContactTopic[] }) {
   const { fields, status, error, setField, submit, reset } =
@@ -30,30 +30,34 @@ export default function ContactForm({ topics }: { topics: ContactTopic[] }) {
       <div
         role="status"
         aria-live="polite"
-        className="border border-(--line)] bg-white/60 p-8"
+        className="rounded-lg border border-[#d9d1c4] bg-white p-8 shadow-sm"
       >
-        <p className="font-[Georgia,serif] text-xl">Message sent.</p>
-        <p className="mt-2 text-sm leading-6 text-(--ink-muted)]">
-          Thank you — your message has been delivered to {PROF_EMAIL}. The
-          professor replies personally, usually within a few days.
+        <div className="flex items-center gap-3">
+          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-green-100 text-green-700">
+            ✓
+          </span>
+          <p className="font-serif text-2xl text-[#17201f]">Message Delivered</p>
+        </div>
+        <p className="mt-4 text-sm leading-relaxed text-[#66706b]">
+          Thank you for reaching out. Your message has been routed to {PROF_EMAIL}. Judge Nsereko reads correspondence personally and endeavors to reply within two to three days.
         </p>
         <button
           type="button"
           onClick={reset}
-          className="mt-6 text-xs uppercase tracking-[0.13em] underline decoration-(--line)] underline-offset-4 transition-colors hover:text-(--red)]"
+          className="mt-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#c64e38] underline underline-offset-4 hover:text-[#a83d2c]"
         >
-          Send another message
+          ← Send another message
         </button>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate={false}>
-      <div className="grid gap-5 md:grid-cols-2">
+    <form onSubmit={handleSubmit} noValidate={false} className="space-y-6">
+      <div className="grid gap-6 md:grid-cols-2">
         <div>
           <label className={labelClasses} htmlFor="contact-name">
-            Your name
+            Your Name *
           </label>
           <input
             id="contact-name"
@@ -64,13 +68,13 @@ export default function ContactForm({ topics }: { topics: ContactTopic[] }) {
             maxLength={80}
             value={fields.name}
             onChange={(event) => setField("name", event.target.value)}
-            placeholder="Jane Doe"
+            placeholder="e.g. Dr. Eleanor Vance"
             className={fieldClasses}
           />
         </div>
         <div>
           <label className={labelClasses} htmlFor="contact-email">
-            Your email
+            Your Email Address *
           </label>
           <input
             id="contact-email"
@@ -80,15 +84,15 @@ export default function ContactForm({ topics }: { topics: ContactTopic[] }) {
             maxLength={254}
             value={fields.email}
             onChange={(event) => setField("email", event.target.value)}
-            placeholder="you@example.com"
+            placeholder="you@institution.edu"
             className={fieldClasses}
           />
         </div>
       </div>
 
-      <div className="mt-5">
+      <div>
         <label className={labelClasses} htmlFor="contact-topic">
-          Topic
+          Subject Category *
         </label>
         <select
           id="contact-topic"
@@ -96,20 +100,25 @@ export default function ContactForm({ topics }: { topics: ContactTopic[] }) {
           required
           value={fields.topicId}
           onChange={(event) => setField("topicId", event.target.value)}
-          className={`${fieldClasses} appearance-none`}
+          className={fieldClasses}
         >
           {topics.map((topic) => (
             <option key={topic.id} value={topic.id}>
-              {topic.label}
+              {topic.label} — {topic.subject}
             </option>
           ))}
         </select>
       </div>
 
-      <div className="mt-5">
-        <label className={labelClasses} htmlFor="contact-message">
-          Message
-        </label>
+      <div>
+        <div className="flex items-center justify-between">
+          <label className={labelClasses} htmlFor="contact-message">
+            Message *
+          </label>
+          <span className="text-[11px] text-[#66706b]">
+            {fields.message.length}/5000 characters
+          </span>
+        </div>
         <textarea
           id="contact-message"
           name="message"
@@ -119,17 +128,14 @@ export default function ContactForm({ topics }: { topics: ContactTopic[] }) {
           rows={7}
           value={fields.message}
           onChange={(event) => setField("message", event.target.value)}
-          placeholder={`e.g. ${selectedTopic?.bodyIntro ?? "Hello David,"} ...`}
-          className={`${fieldClasses} resize-y`}
+          placeholder={`e.g. ${selectedTopic?.bodyIntro ?? "Dear Judge Nsereko,"} ...`}
+          className={`${fieldClasses} resize-y font-sans`}
         />
-        <p className="mt-1.5 text-[11px] text-(--ink-muted)]">
-          {fields.message.length}/5000 characters
-        </p>
       </div>
 
-      {/* Honeypot — hidden from humans, catches bots */}
+      {/* Honeypot hidden input */}
       <div
-        className="absolute left-[9999px] h-0 w-0 overflow-hidden"
+        className="absolute left-[-9999px] h-0 w-0 overflow-hidden"
         aria-hidden="true"
       >
         <label htmlFor="contact-company">Company</label>
@@ -145,36 +151,39 @@ export default function ContactForm({ topics }: { topics: ContactTopic[] }) {
       </div>
 
       {status === "error" && error && (
-        <p
+        <div
           role="status"
           aria-live="polite"
-          className="mt-5 border-l-2 border-(--red)] bg-white/60 p-3 text-sm leading-6"
+          className="rounded-md border-l-4 border-[#c64e38] bg-red-50 p-4 text-xs leading-relaxed text-red-900"
         >
-          {error}{" "}
-          <a
-            className="underline underline-offset-4 hover:text-(--red)]"
-            href={
-              selectedTopic
-                ? buildMailto(selectedTopic)
-                : `mailto:${PROF_EMAIL}`
-            }
-          >
-            Email the professor directly ↗
-          </a>
-        </p>
+          <p className="font-semibold">{error}</p>
+          <p className="mt-1">
+            Alternatively, you can{" "}
+            <a
+              className="font-semibold underline hover:text-[#c64e38]"
+              href={
+                selectedTopic
+                  ? buildMailto(selectedTopic)
+                  : `mailto:${PROF_EMAIL}`
+              }
+            >
+              email Judge Nsereko directly at {PROF_EMAIL} ↗
+            </a>
+          </p>
+        </div>
       )}
 
-      <div className="mt-6 flex flex-wrap items-center gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
         <button
           type="submit"
           disabled={status === "sending"}
-          className="inline-flex items-center gap-2 border border-(--foreground)] bg-(--foreground)] px-6 py-3 text-xs uppercase tracking-[0.13em] text-(--background)] transition-colors hover:border-(--red)] hover:bg-(--red)] disabled:cursor-not-allowed disabled:opacity-60"
+          className="inline-flex items-center justify-center gap-2 rounded-md bg-[#17201f] px-6 py-3 text-xs font-semibold uppercase tracking-wider text-[#fff8ed] transition hover:bg-[#c64e38] focus:outline-none focus:ring-2 focus:ring-[#c64e38] disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {status === "sending" ? "Sending…" : "Send message"}
+          {status === "sending" ? "Transmitting..." : "Send Message"}
           <span aria-hidden="true">↗</span>
         </button>
-        <p className="text-[11px] text-(--ink-muted)]">
-          No mail app opens — the message is delivered straight to {PROF_EMAIL}.
+        <p className="text-xs text-[#66706b]">
+          Messages are dispatched directly to the Judge&apos;s personal inbox.
         </p>
       </div>
     </form>

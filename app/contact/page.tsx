@@ -1,84 +1,116 @@
 import type { Metadata } from "next";
 import ContactForm from "@/app/hooks/contact-form";
 import { buildMailto, PROF_EMAIL, topics } from "@/app/lib/contact/topics";
+import { PageHero } from "@/app/components/ui/page-hero";
 
 export const metadata: Metadata = {
-  title: "Contact | David Daniel Nsereko",
+  title: "Contact & Inquiries | Judge Daniel David Ntanda Nsereko",
   description:
-    "Contact Prof. David Daniel Nsereko — speaking invitations, books, teaching, and general inquiries.",
+    "Get in touch with Judge Daniel David Ntanda Nsereko for speaking engagements, research inquiries, books, and academic collaboration.",
 };
 
 export default function ContactPage() {
   return (
-    <main className="inner-page" aria-labelledby="contact-page-title">
+    <main className="bg-white text-[#17201f]">
+      {/* Hero */}
+      <PageHero
+        eyebrow="Correspondence"
+        badge="Direct Inquiries"
+        title={
+          <>
+            Start a <em className="text-[#e6c66a] not-italic">Conversation</em>
+          </>
+        }
+        description="Whether you are an academic institution inviting Judge Nsereko to speak, a legal researcher seeking citation guidance, or a publisher, we welcome your message."
+        asideTitle="Direct Email"
+        asideText={PROF_EMAIL}
+      />
+
+      {/* Inquiry Topic Grid */}
       <section
-        id="speaking"
-        className="grid gap-px border-y border-(--line)] bg-(--line)] md:grid-cols-2 lg:grid-cols-3"
+        className="grid gap-px border-y border-[#d9d1c4] bg-[#d9d1c4] sm:grid-cols-2 lg:grid-cols-3"
         aria-label="Inquiry topics"
       >
         {topics.map((topic, index) => (
           <a
             key={topic.id}
             href={buildMailto(topic)}
-            className="group flex min-h-40 flex-col bg-(--background)] p-7 transition-colors hover:bg-white"
+            className="group flex flex-col justify-between bg-white p-8 transition-colors hover:bg-[#faf6ef]"
           >
             <div>
-              <p className="section-index">
-                {String(index + 1).padStart(2, "0")} — {topic.label}
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#c64e38]">
+                0{index + 1} — {topic.label}
               </p>
-              <p className="mt-3 text-[13px] leading-6 text-(--ink-muted)]">
+              <h3 className="mt-2 font-serif text-xl text-[#17201f] transition group-hover:text-[#c64e38]">
+                {topic.subject}
+              </h3>
+              <p className="mt-3 text-xs leading-relaxed text-[#66706b]">
                 {topic.description}
               </p>
             </div>
+            <span className="mt-6 inline-flex items-center gap-1.5 text-xs font-semibold text-[#16404d] group-hover:text-[#c64e38]">
+              Open mail draft ↗
+            </span>
           </a>
         ))}
       </section>
 
-      {/* Compose form — sends directly to the professor's inbox via Brevo */}
-      <section className="px-[5.5vw] py-20" aria-label="Write a message">
+      {/* Compose Form Section */}
+      <section className="px-6 py-20 sm:px-10 lg:px-[5.5vw]" aria-label="Compose a message">
         <div className="mx-auto max-w-3xl">
-          <div className="mb-10 flex items-end justify-between gap-6 border-b border-(--line)] pb-5">
+          <div className="mb-10 flex flex-col justify-between gap-4 border-b border-[#d9d1c4] pb-6 sm:flex-row sm:items-end">
             <div>
-              <h2 className="font-[Georgia,serif] text-2xl font-medium tracking-tight">
-                compose your message here
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#c64e38]">
+                Web Form
+              </p>
+              <h2 className="mt-2 font-serif text-3xl font-normal text-[#17201f]">
+                Compose Your Message
               </h2>
             </div>
             <a
               href={`mailto:${PROF_EMAIL}`}
-              className="text-link shrink-0 text-xs"
+              className="text-xs font-semibold text-[#16404d] underline decoration-[#c64e38] underline-offset-4 hover:text-[#c64e38]"
             >
-              {PROF_EMAIL}
+              Direct Email: {PROF_EMAIL} ↗
             </a>
           </div>
-          <ContactForm topics={topics} />
+
+          <div className="rounded-xl border border-[#d9d1c4] bg-[#faf6ef]/70 p-6 sm:p-10">
+            <ContactForm topics={topics} />
+          </div>
         </div>
       </section>
 
-      {/* Expectations & privacy — builds trust, reduces follow-up emails */}
+      {/* Expectations & Guidance */}
       <section
-        className="border-t border-(--line)] px-[5.5vw] py-14"
+        className="border-t border-[#d9d1c4] bg-[#faf6ef] px-6 py-16 sm:px-10 lg:px-[5.5vw]"
         aria-label="What to expect"
       >
-        <div className="mx-auto grid max-w-3xl gap-8 md:grid-cols-3">
-          <div>
-            <p className="section-index">Response time</p>
-            <p className="mt-3 text-[13px] leading-6 text-(--ink-muted)]">
-              The professor reads and replies to every message personally,
-              usually within two to three working days.
+        <div className="mx-auto grid max-w-4xl gap-8 sm:grid-cols-3">
+          <div className="rounded-lg border border-[#d9d1c4] bg-white p-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#c64e38]">
+              Response Time
+            </p>
+            <p className="mt-3 text-xs leading-relaxed text-[#66706b]">
+              The Judge reads correspondence personally and endeavors to reply within two to three working days.
             </p>
           </div>
-          <div>
-            <p className="section-index">What helps</p>
-            <p className="mt-3 text-[13px] leading-6 text-(--ink-muted)]">
-              Choosing a topic above, one clear message, and any dates or
-              details — it all helps a faster, more useful reply.
+
+          <div className="rounded-lg border border-[#d9d1c4] bg-white p-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#c64e38]">
+              Speaking Details
+            </p>
+            <p className="mt-3 text-xs leading-relaxed text-[#66706b]">
+              Including event dates, venue location, topic, and organizing entity assists in prompt confirmation.
             </p>
           </div>
-          <div>
-            <p className="section-index">Your privacy</p>
-            <p className="mt-3 text-[13px] leading-6 text-(--ink-muted)]">
-              Your name and email are used only to reply to you. Nothing is
-              published, shared, or added to a mailing list.
+
+          <div className="rounded-lg border border-[#d9d1c4] bg-white p-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#c64e38]">
+              Privacy Notice
+            </p>
+            <p className="mt-3 text-xs leading-relaxed text-[#66706b]">
+              Your contact details are used solely to reply to your inquiry. No marketing lists or public disclosures.
             </p>
           </div>
         </div>
