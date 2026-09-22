@@ -1,36 +1,120 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Judge Nsereko Public Archive
 
-## Getting Started
+The public archive for Judge Daniel David Ntanda Nsereko. It contains the
+profile, career record, books, scholarship, speaking information, search, and
+authenticated contact workflow.
 
-First, run the development server:
+## Stack
+
+- Next.js 16 App Router and React 19
+- Tailwind CSS 4
+- Supabase Auth and Postgres
+- Brevo SMTP API for authenticated contact delivery
+- OpenNext for Cloudflare Workers
+
+## Local setup
+
+Requirements: Node.js 20 or newer, npm, and access to the Supabase and Brevo
+projects.
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Create `.env.local` with the public Supabase values and server-only mail
+settings:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```dotenv
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your-supabase-publishable-key
+BREVO_API_KEY=your-brevo-api-key
+BREVO_SENDER_EMAIL=verified-sender@example.com
+```
 
-## Learn More
+Never commit `.env.local`, `.dev.vars`, or any API key. Cloudflare local
+preview reads server secrets from `.dev.vars` when configured.
 
-To learn more about Next.js, take a look at the following resources:
+## Supabase setup
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Create a Supabase project and copy its URL and publishable key into the
+   environment file.
+2. Run the migration in
+   `supabase/migrations/202609150001_profiles.sql` against the project.
+3. Enable email/password authentication in Supabase Auth.
+4. Add these redirect URLs under Authentication > URL Configuration:
+   - `http://localhost:3000/auth/callback`
+   - `https://prof-branding-site.sharifsseba.workers.dev/auth/callback`
+   - the callback URL for any custom production domain
+5. Confirm the `profiles` table, row-level security policies, and new-user
+   trigger exist after migration.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Unauthenticated visitors to `/contact` are sent through signup and returned to
+the contact composer after email verification.
 
-## Deploy on Vercel
+## Brevo setup
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Create a Brevo API key with permission to send transactional email.
+2. Verify the sender domain or sender address used by `BREVO_SENDER_EMAIL`.
+3. Set `BREVO_API_KEY` and `BREVO_SENDER_EMAIL` in the production secret
+   store.
+4. Submit a real contact message and confirm delivery and reply-to behavior.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Without `BREVO_API_KEY`, the contact API returns a clear configuration error
+and the page keeps the direct email fallback available.
+
+## Cloudflare deployment
+
+Authenticate Wrangler, then use the repository scripts:
+
+```bash
+npx wrangler login
+npm run build
+npm run deploy
+```
+
+The worker and asset configuration lives in `wrangler.jsonc`. The deploy
+script builds OpenNext and deploys `.open-next/worker.js`. Configure these
+production variables or secrets in the Cloudflare Worker environment:
+
+- `NEXT_PUBLIC_SITE_URL`
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
+- `BREVO_API_KEY`
+- `BREVO_SENDER_EMAIL`
+
+Cloudflare observability is enabled in `wrangler.jsonc`. Use Worker logs and
+metrics to monitor request failures, auth callbacks, and contact API
+responses. Add Cloudflare Web Analytics separately if visitor analytics are
+required; no tracking script is bundled by default.
+
+## Validation commands
+
+```bash
+npm run lint
+npx tsc --noEmit
+npm run check:production-config
+npm run build
+```
+
+Run `npm run check:production-config` in the production environment before
+deploying. It verifies that all required variables are present and that the
+public site and Supabase URLs use HTTPS outside localhost.
+
+Before release, test signup, email verification, sign-in, sign-out, the
+protected contact page, successful Brevo delivery, direct-email fallback, the
+custom 404 page, and keyboard navigation on mobile and desktop.
+
+## Main routes
+
+- `/` - archive overview
+- `/career` - career and CV
+- `/books` - books catalogue
+- `/writing` - scholarship explorer
+- `/speaking` - speaking engagements
+- `/contact` - authenticated contact composer
+- `/search` - archive search
+- `/account` - authenticated member portal

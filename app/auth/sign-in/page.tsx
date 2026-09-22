@@ -6,6 +6,14 @@ export const metadata: Metadata = {
   description: "Sign in to access books and contact the professor.",
 };
 
-export default function SignInPage() {
-  return <AuthForm mode="sign-in" />;
+type SignInPageProps = {
+  searchParams: Promise<{ next?: string; error?: string }>;
+};
+
+export default async function SignInPage({ searchParams }: SignInPageProps) {
+  const { next = "/account", error } = await searchParams;
+  const nextPath =
+    next.startsWith("/") && !next.startsWith("//") ? next : "/account";
+
+  return <AuthForm mode="sign-in" nextPath={nextPath} initialError={error} />;
 }

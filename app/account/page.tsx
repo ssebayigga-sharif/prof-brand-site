@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "../lib/supabase/server";
+import { books } from "../lib/books";
 import SignOutButton from "./sign-out-button";
 
 export const metadata: Metadata = {
   title: "Your Account | Judge Daniel David Ntanda Nsereko",
-  description: "Manage your account and profile for the Judge Nsereko public archive.",
+  description:
+    "Manage your account and profile for the Judge Nsereko public archive.",
 };
 
 export default async function AccountPage() {
@@ -37,10 +39,12 @@ export default async function AccountPage() {
         <div className="mt-4 flex flex-col justify-between gap-6 border-b border-[#d9d1c4] pb-10 sm:flex-row sm:items-end">
           <div>
             <h1 className="font-serif text-4xl font-normal sm:text-6xl">
-              Welcome, <em className="text-[#c64e38] not-italic">{displayName}</em>
+              Welcome,{" "}
+              <em className="text-[#c64e38] not-italic">{displayName}</em>
             </h1>
             <p className="mt-3 text-sm text-[#66706b]">
-              Your authenticated session is active. You have access to the archive community and direct communication.
+              Your authenticated session is active. You have access to the
+              archive community and direct communication.
             </p>
           </div>
           <div className="rounded-lg border border-[#d9d1c4] bg-white p-4 text-xs">
@@ -64,10 +68,11 @@ export default async function AccountPage() {
               Library
             </span>
             <h3 className="mt-2 font-serif text-xl text-[#17201f] group-hover:text-[#c64e38]">
-              14 Books &amp; Lexicons
+              {books.length} Books &amp; Lexicons
             </h3>
             <p className="mt-2 text-xs leading-relaxed text-[#66706b]">
-              Browse monographs, Luganda translations, and constitutional law textbooks.
+              Browse monographs, Luganda translations, and constitutional law
+              textbooks.
             </p>
             <span className="mt-4 inline-block text-xs font-medium text-[#16404d]">
               Open catalogue →
@@ -85,7 +90,8 @@ export default async function AccountPage() {
               65+ Articles &amp; Chapters
             </h3>
             <p className="mt-2 text-xs leading-relaxed text-[#66706b]">
-              Review peer-refereed publications and Commentary on the Rome Statute.
+              Review peer-refereed publications and Commentary on the Rome
+              Statute.
             </p>
             <span className="mt-4 inline-block text-xs font-medium text-[#16404d]">
               Explore writing →
@@ -113,7 +119,11 @@ export default async function AccountPage() {
 
         <div className="mt-12 flex items-center justify-between border-t border-[#d9d1c4] pt-8">
           <p className="text-xs text-[#66706b]">
-            Account registered on {profile?.created_at ? new Date(profile.created_at).toLocaleDateString() : "recently"}.
+            Account registered on{" "}
+            {profile?.created_at
+              ? new Date(profile.created_at).toLocaleDateString()
+              : "recently"}
+            .
           </p>
           <SignOutButton />
         </div>

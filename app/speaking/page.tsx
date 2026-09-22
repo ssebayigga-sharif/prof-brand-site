@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { PageHero } from "../components/ui/page-hero";
 import { Button } from "../components/ui/button";
-import { SPEAKING_ENGAGEMENTS, PERSONAL_DATA } from "../lib/data/cv-data";
+import { SPEAKING_ENGAGEMENTS } from "../lib/data/cv-data";
 
 export const metadata: Metadata = {
   title: "Speaking & Lectures | Judge Daniel David Ntanda Nsereko",
@@ -41,7 +41,8 @@ export default function SpeakingPage() {
         badge="International Addresses"
         title={
           <>
-            Advancing the Dialogue on <em className="text-[#e6c66a] not-italic">Global Justice</em>
+            Advancing the Dialogue on{" "}
+            <em className="text-[#e6c66a] not-italic">Global Justice</em>
           </>
         }
         description="Keynote addresses, distinguished university lectures, and judicial seminars delivered across Europe, North America, Africa, and Asia on international humanitarian and criminal law."
@@ -122,9 +123,13 @@ export default function SpeakingPage() {
                 className="py-6 transition hover:bg-[#faf6ef]/70"
               >
                 <div className="flex flex-wrap items-center gap-3 text-xs">
-                  <span className="font-semibold text-[#c64e38]">{lecture.year}</span>
+                  <span className="font-semibold text-[#c64e38]">
+                    {lecture.year}
+                  </span>
                   <span className="text-[#a9b8b3]">·</span>
-                  <span className="text-[#16404d] font-medium">{lecture.location}</span>
+                  <span className="text-[#16404d] font-medium">
+                    {lecture.location}
+                  </span>
                   {lecture.date && (
                     <>
                       <span className="text-[#a9b8b3]">·</span>
@@ -152,7 +157,6 @@ export default function SpeakingPage() {
 
       {/* Speaking Inquiry Process & CTA */}
       <section className="emblem bg-[#17201f] px-6 py-16 text-[#fff8ed] sm:px-10 lg:px-[5.5vw] lg:py-20">
-        <div aria-hidden="true" className="emblem-mark" />
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#e6c66a]">
             Invitations &amp; Engagements
@@ -161,18 +165,13 @@ export default function SpeakingPage() {
             Invite Judge Nsereko to Speak
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-[#d8e0dc]">
-            Please provide event dates, host institution, conference theme, and audience profile.
-            All invitations are reviewed personally.
+            Please provide event dates, host institution, conference theme, and
+            audience profile. All invitations are reviewed personally. An active
+            member account is required to send inquiries.
           </p>
-          <div className="mt-8 flex justify-center gap-4">
+          <div className="mt-8 flex justify-center">
             <Button variant="primary" href="/contact">
-              Send Speaking Invitation →
-            </Button>
-            <Button
-              variant="outline-light"
-              href={`mailto:${PERSONAL_DATA.email}?subject=Speaking%20Invitation%20for%20Judge%20Nsereko`}
-            >
-              Direct Email
+              Send Speaking Invitation (Member Sign-in) →
             </Button>
           </div>
         </div>

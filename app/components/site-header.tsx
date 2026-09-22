@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { createClient } from "../lib/supabase/client";
 
 const navigation = [
@@ -17,15 +17,48 @@ const navigation = [
 
 export default function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [displayName, setDisplayName] = useState<string | null>(null);
   const pathname = usePathname();
+  const router = useRouter();
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Check auth state for header display
+  // Close dropdown on click outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setUserDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+        setUserDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  // Auth subscription
   useEffect(() => {
     const supabase = createClient();
     supabase.auth.getUser().then(({ data }) => {
       if (data?.user?.email) {
         setUserEmail(data.user.email);
+        setDisplayName(
+          data.user.user_metadata?.full_name || data.user.email.split("@")[0],
+        );
       }
     });
 
@@ -33,10 +66,28 @@ export default function SiteHeader() {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
       setUserEmail(session?.user?.email ?? null);
+      setDisplayName(
+        session?.user?.user_metadata?.full_name ||
+          (session?.user?.email ? session.user.email.split("@")[0] : null),
+      );
     });
 
     return () => subscription.unsubscribe();
   }, []);
+
+  const handleSignOut = async () => {
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    setUserDropdownOpen(false);
+    router.push("/");
+    router.refresh();
+  };
+
+  const userInitial = displayName
+    ? displayName.charAt(0).toUpperCase()
+    : userEmail
+      ? userEmail.charAt(0).toUpperCase()
+      : "U";
 
   return (
     <>
@@ -76,8 +127,8 @@ export default function SiteHeader() {
               item.href === "/"
                 ? pathname === "/"
                 : item.href.startsWith("/#")
-                ? false
-                : pathname.startsWith(item.href);
+                  ? false
+                  : pathname.startsWith(item.href);
 
             return (
               <Link
@@ -122,13 +173,81 @@ export default function SiteHeader() {
             </button>
           </form>
 
+          {/* Account Icon / Dropdown */}
           {userEmail ? (
-            <Link
-              href="/account"
-              className="rounded-full border border-[#e6c66a]/50 bg-[#e6c66a]/10 px-3.5 py-1.5 text-xs font-semibold text-[#e6c66a] transition hover:bg-[#e6c66a] hover:text-[#17201f]"
+            <div
+              className="relative"
+              ref={dropdownRef}
+              onMouseEnter={() => setUserDropdownOpen(true)}
+              onMouseLeave={() => setUserDropdownOpen(false)}
             >
-              Account
-            </Link>
+              <button
+                type="button"
+                onClick={() => setUserDropdownOpen((open) => !open)}
+                aria-expanded={userDropdownOpen}
+                aria-haspopup="true"
+                aria-label="Account details"
+                className="relative flex h-10 w-10 items-center justify-center rounded-full border border-[#e6c66a]/60 bg-[#24312f] text-xs font-bold text-[#e6c66a] shadow-sm transition hover:border-[#e6c66a] hover:bg-[#e6c66a] hover:text-[#17201f] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#e6c66a] focus-visible:ring-offset-2 focus-visible:ring-offset-[#17201f]"
+              >
+                {userInitial}
+                <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-emerald-500 ring-2 ring-[#17201f]" />
+              </button>
+
+              {/* Account Dropdown Card */}
+              {userDropdownOpen && (
+                <div className="absolute right-0 mt-2 w-64 rounded-xl border border-[#d9d1c4]/20 bg-[#17201f] p-4 text-[#fff8ed] shadow-2xl backdrop-blur-md z-50">
+                  <div className="border-b border-white/10 pb-3">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#e6c66a] text-sm font-bold text-[#17201f]">
+                        {userInitial}
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="truncate text-xs font-semibold text-white">
+                          {displayName || "Member"}
+                        </p>
+                        <p className="truncate text-[11px] text-[#a9b8b3]">
+                          {userEmail}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="mt-2.5 flex items-center gap-1 text-[10px] font-medium text-emerald-400">
+                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                      Authenticated Member
+                    </div>
+                  </div>
+
+                  <div className="py-2 space-y-1">
+                    <Link
+                      href="/account"
+                      onClick={() => setUserDropdownOpen(false)}
+                      className="flex items-center justify-between rounded-md px-3 py-2 text-xs text-[#d8e0dc] transition hover:bg-white/10 hover:text-[#e6c66a]"
+                    >
+                      <span>Account Portal</span>
+                      <span>↗</span>
+                    </Link>
+                    <Link
+                      href="/contact"
+                      onClick={() => setUserDropdownOpen(false)}
+                      className="flex items-center justify-between rounded-md px-3 py-2 text-xs text-[#d8e0dc] transition hover:bg-white/10 hover:text-[#e6c66a]"
+                    >
+                      <span>Direct Message Judge</span>
+                      <span>↗</span>
+                    </Link>
+                  </div>
+
+                  <div className="border-t border-white/10 pt-2">
+                    <button
+                      type="button"
+                      onClick={handleSignOut}
+                      className="flex w-full items-center justify-between rounded-md px-3 py-2 text-xs text-red-300 transition hover:bg-red-950/50 hover:text-red-200"
+                    >
+                      <span>Sign out</span>
+                      <span>⎋</span>
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
           ) : (
             <div className="flex items-center gap-3">
               <Link
@@ -176,8 +295,15 @@ export default function SiteHeader() {
       {/* Mobile Drawer */}
       <div
         id="mobile-navigation"
+        role="dialog"
+        aria-label="Mobile navigation"
+        aria-modal="true"
+        aria-hidden={!menuOpen}
+        inert={!menuOpen}
         className={`fixed top-20 right-0 z-50 flex h-[calc(100dvh-5rem)] w-full max-w-sm flex-col justify-between border-l border-[#a9b8b3]/20 bg-[#16404d] p-6 text-[#fff8ed] shadow-2xl transition-transform duration-300 ease-in-out lg:hidden ${
-          menuOpen ? "translate-x-0" : "translate-x-full"
+          menuOpen
+            ? "visible translate-x-0"
+            : "invisible pointer-events-none translate-x-full"
         }`}
       >
         <div className="flex flex-col gap-6">
@@ -206,7 +332,10 @@ export default function SiteHeader() {
             </button>
           </form>
 
-          <nav className="flex flex-col divide-y divide-[#a9b8b3]/20" aria-label="Mobile Navigation">
+          <nav
+            className="flex flex-col divide-y divide-[#a9b8b3]/20"
+            aria-label="Mobile Navigation"
+          >
             {navigation.map((item, idx) => (
               <Link
                 key={item.href}
@@ -226,13 +355,22 @@ export default function SiteHeader() {
         <div className="border-t border-[#a9b8b3]/20 pt-6">
           <div className="flex flex-wrap items-center gap-4 text-sm">
             {userEmail ? (
-              <Link
-                href="/account"
-                onClick={() => setMenuOpen(false)}
-                className="font-medium text-[#e6c66a]"
-              >
-                My Account ({userEmail.split("@")[0]})
-              </Link>
+              <div className="flex w-full items-center justify-between">
+                <Link
+                  href="/account"
+                  onClick={() => setMenuOpen(false)}
+                  className="font-medium text-[#e6c66a]"
+                >
+                  My Account ({userEmail.split("@")[0]})
+                </Link>
+                <button
+                  type="button"
+                  onClick={handleSignOut}
+                  className="text-xs text-red-300 underline"
+                >
+                  Sign out
+                </button>
+              </div>
             ) : (
               <>
                 <Link

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { Button } from "./components/ui/button";
 import { SectionHeading } from "./components/ui/section-heading";
 import {
@@ -18,20 +19,29 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  const featuredBooks = books.slice(0, 3);
+  const featuredBookIds = [
+    "to-the-hague-from-nabinene",
+    "eddundiro-lya-bawansolo",
+    "eddembe-lyaffe",
+    "english-luganda-law-dictionary",
+    "constitutional-law-in-botswana",
+    "criminal-law-in-uganda",
+  ];
+  const featuredBooks = featuredBookIds
+    .map((id) => books.find((b) => b.id === id)!)
+    .filter(Boolean);
   const selectedCareer = CAREER_HISTORY.filter(
     (c) =>
       c.role.includes("Judge") ||
       c.role.includes("President") ||
       c.role.includes("Professor of Law") ||
-      c.role.includes("Head")
+      c.role.includes("Head"),
   ).slice(0, 5);
 
   return (
     <main className="bg-white text-[#17201f]" id="about">
       {/* Hero Section */}
       <section className="emblem bg-[#17201f] text-[#fff8ed] pt-20">
-        <div aria-hidden="true" className="emblem-mark" />
         <div className="grid min-h-[calc(100svh-5rem)] items-center gap-10 px-6 py-12 sm:px-10 sm:py-16 lg:grid-cols-[minmax(0,1fr)_minmax(320px,420px)] lg:px-[5.5vw] lg:py-20">
           <div className="max-w-4xl">
             <div className="flex flex-wrap items-center gap-3 mb-6">
@@ -49,9 +59,10 @@ export default function Home() {
             </h1>
 
             <p className="mt-8 max-w-2xl text-base leading-relaxed text-[#d8e0dc] sm:text-lg sm:leading-8">
-              A Ugandan scholar, appellate judge, and author whose landmark contributions span
-              the International Criminal Court, the Special Tribunal for Lebanon, university classrooms
-              across Africa and North America, and indigenous language legal scholarship.
+              A Ugandan scholar, appellate judge, and author whose landmark
+              contributions span the International Criminal Court, the Special
+              Tribunal for Lebanon, university classrooms across Africa and
+              North America, and indigenous language legal scholarship.
             </p>
 
             <div className="mt-10 flex flex-wrap gap-4">
@@ -127,7 +138,9 @@ export default function Home() {
                 Judicial Service
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-[#66706b]">
-                President of the ICC Appeals Division (2009–2010), Judge of the ICC (2007–2012), and Judge of the Appeals Chamber of the Special Tribunal for Lebanon (2012–2023).
+                President of the ICC Appeals Division (2009–2010), Judge of the
+                ICC (2007–2012), and Judge of the Appeals Chamber of the Special
+                Tribunal for Lebanon (2012–2023).
               </p>
             </div>
             <div className="rounded-lg border border-[#d9d1c4] bg-[#faf6ef] p-6">
@@ -135,7 +148,9 @@ export default function Home() {
                 Academic Leadership
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-[#66706b]">
-                Head of Department and Professor of Law at University of Botswana; Walter S. Owen Visiting Professor at University of British Columbia; Senior Lecturer at Makerere University.
+                Head of Department and Professor of Law at University of
+                Botswana; Walter S. Owen Visiting Professor at University of
+                British Columbia; Senior Lecturer at Makerere University.
               </p>
             </div>
           </div>
@@ -168,7 +183,8 @@ export default function Home() {
             Distinguished Appointments
           </h2>
           <p className="mt-4 text-xs leading-relaxed text-[#66706b]">
-            Key roles in the bench, government delegations, and legal education across the globe.
+            Key roles in the bench, government delegations, and legal education
+            across the globe.
           </p>
           <div className="mt-6">
             <Button variant="red" size="sm" href="/career">
@@ -209,15 +225,16 @@ export default function Home() {
         className="emblem grid gap-12 bg-[#16404d] px-6 py-16 text-[#fff8ed] sm:px-10 lg:grid-cols-[minmax(300px,400px)_minmax(0,1fr)] lg:gap-16 lg:px-[5.5vw] lg:py-24"
         aria-labelledby="books-heading"
       >
-        <div aria-hidden="true" className="emblem-mark" />
-        <div className="group relative aspect-3/4 overflow-hidden rounded-md border border-[#fff8ed]/20 bg-[#24385e] shadow-2xl">
-          <Image
-            src="/author.png"
-            alt="Cover of To The Hague from Nabinene"
-            fill
-            className="object-cover object-top transition duration-700 ease-out group-hover:scale-105"
-            sizes="(max-width: 1024px) 90vw, 400px"
-          />
+        <div className="group relative aspect-3/4 overflow-hidden rounded-md border border-[#fff8ed]/20 bg-linear-to-b from-[#1b2b29] to-[#0f1a18] p-6 shadow-2xl flex items-center justify-center">
+          <div className="relative w-full h-full">
+            <Image
+              src="/author.png"
+              alt="Cover of To The Hague from Nabinene"
+              fill
+              className="object-contain drop-shadow-[0_16px_28px_rgba(0,0,0,0.65)] transition duration-700 ease-out group-hover:scale-105"
+              sizes="(max-width: 1024px) 90vw, 400px"
+            />
+          </div>
         </div>
 
         <div className="flex flex-col justify-center">
@@ -231,29 +248,43 @@ export default function Home() {
             A life in law, written for courts, scholars, and communities.
           </h2>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-[#d8e0dc] sm:text-lg">
-            Author of 14 major volumes spanning constitutional jurisprudence, comparative criminal procedure,
-            memoir, and translations into Luganda — connecting legal principle with cultural heritage.
+            Author of {books.length} major volumes spanning constitutional
+            jurisprudence, comparative criminal procedure, memoir, and
+            translations into Luganda — connecting legal principle with cultural
+            heritage.
           </p>
 
-          <div className="mt-8 grid gap-4 sm:grid-cols-3">
+          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {featuredBooks.map((b) => (
-              <div
+              <Link
                 key={b.id}
-                className="rounded border border-[#fff8ed]/20 bg-[#24312f]/60 p-4 backdrop-blur-sm"
+                href="/books"
+                className="group flex items-center gap-3 rounded border border-[#fff8ed]/20 bg-[#24312f]/60 p-3 backdrop-blur-sm transition hover:border-[#e6c66a] hover:bg-[#24312f]/90"
               >
-                <span className="text-[10px] font-semibold uppercase tracking-wider text-[#e6c66a]">
-                  {b.year} · {b.category}
-                </span>
-                <h4 className="mt-2 font-serif text-lg leading-snug text-[#fff8ed]">
-                  {b.title}
-                </h4>
-              </div>
+                <div className="relative h-14 w-10 shrink-0 overflow-hidden rounded bg-[#162220] p-0.5">
+                  <Image
+                    src={b.image}
+                    alt={b.title}
+                    fill
+                    className="object-contain"
+                    sizes="40px"
+                  />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <span className="block text-[10px] font-semibold uppercase tracking-wider text-[#e6c66a]">
+                    {b.year} · {b.category}
+                  </span>
+                  <h4 className="mt-1 font-serif text-sm leading-snug text-[#fff8ed] truncate group-hover:text-[#e6c66a] transition-colors">
+                    {b.title}
+                  </h4>
+                </div>
+              </Link>
             ))}
           </div>
 
           <div className="mt-10 flex flex-wrap gap-4">
             <Button variant="primary" href="/books">
-              Explore All 14 Books →
+              Explore All {books.length} Books →
             </Button>
             <Button variant="outline-light" href="/writing">
               Scholarly Articles &amp; Chapters
@@ -268,7 +299,10 @@ export default function Home() {
         aria-labelledby="education-heading"
       >
         <div>
-          <span aria-hidden="true" className="mb-4 block h-0.5 w-12 bg-[#c64e38]" />
+          <span
+            aria-hidden="true"
+            className="mb-4 block h-0.5 w-12 bg-[#c64e38]"
+          />
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#66706b]">
             04 / Foundations
           </p>
@@ -279,7 +313,8 @@ export default function Home() {
             Formed in Rigorous Traditions
           </h2>
           <p className="mt-4 text-xs leading-relaxed text-[#66706b]">
-            Doctoral and comparative legal training at leading American and African law faculties.
+            Doctoral and comparative legal training at leading American and
+            African law faculties.
           </p>
         </div>
 
@@ -293,16 +328,22 @@ export default function Home() {
                 <p className="mt-2 text-sm font-medium text-[#16404d]">
                   {edu.institution}
                 </p>
-                <p className="text-xs text-[#66706b]">{edu.location} · {edu.period}</p>
+                <p className="text-xs text-[#66706b]">
+                  {edu.location} · {edu.period}
+                </p>
                 {edu.note && (
-                  <p className="mt-2 text-xs italic text-[#66706b]">{edu.note}</p>
+                  <p className="mt-2 text-xs italic text-[#66706b]">
+                    {edu.note}
+                  </p>
                 )}
               </div>
             ))}
           </div>
 
           <div className="mt-10 rounded-lg border border-[#d9d1c4] bg-white p-6">
-            <h3 className="font-serif text-xl text-[#17201f]">Professional Status</h3>
+            <h3 className="font-serif text-xl text-[#17201f]">
+              Professional Status
+            </h3>
             <div className="mt-4 space-y-3">
               {PROFESSIONAL_STATUS.map((status, idx) => (
                 <div key={idx} className="flex items-start gap-3">
@@ -311,7 +352,9 @@ export default function Home() {
                     <strong className="text-sm font-semibold text-[#17201f]">
                       {status.title} ({status.period})
                     </strong>
-                    <p className="text-xs text-[#66706b]">{status.description}</p>
+                    <p className="text-xs text-[#66706b]">
+                      {status.description}
+                    </p>
                   </div>
                 </div>
               ))}
@@ -361,7 +404,6 @@ export default function Home() {
         className="emblem bg-[#8e352f] px-6 py-16 text-[#fff8ed] sm:px-10 lg:px-[5.5vw] lg:py-24"
         aria-label="Profile conclusion"
       >
-        <div aria-hidden="true" className="emblem-mark" />
         <div className="max-w-4xl">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#f4d0c3]">
             An Enduring Record
@@ -370,8 +412,8 @@ export default function Home() {
             Advancing international justice. Writing for future generations.
           </h2>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-[#f5ecdd] sm:text-lg">
-            Whether inquiring about speaking engagements, academic collaborations, or book copies,
-            we welcome your correspondence.
+            Whether inquiring about speaking engagements, academic
+            collaborations, or book copies, we welcome your correspondence.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <Button variant="primary" href="/contact">

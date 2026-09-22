@@ -18,18 +18,27 @@ function escapeHtml(value: string): string {
 }
 
 export async function POST(request: NextRequest): Promise<Response> {
-  // Optional auth: if user is signed in, we note it, but we don't reject public visitors
-  let userEmail: string | undefined;
+  // Mandatory authentication: only authenticated users can email Professor Nsereko
+  let userEmail: string;
   try {
     const supabase = await createClient();
     const {
       data: { user },
     } = await supabase.auth.getUser();
-    if (user?.email) {
-      userEmail = user.email;
+
+    if (!user || !user.email) {
+      return jsonError(
+        "Authentication required. Please sign in to your account before sending a message to Professor Nsereko.",
+        401
+      );
     }
-  } catch {
-    // Auth check optional for public contact
+    userEmail = user.email;
+  } catch (error) {
+    console.error("Auth check failed in contact API:", error);
+    return jsonError(
+      "Authentication verification failed. Please ensure you are logged in.",
+      401
+    );
   }
 
   let body: Record<string, unknown>;

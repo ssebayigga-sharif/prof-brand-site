@@ -15,6 +15,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ??
+      "https://prof-branding-site.sharifsseba.workers.dev",
+  ),
   title: {
     default: "Judge Daniel David Ntanda Nsereko | Jurist, Professor & Author",
     template: "%s | Judge Daniel David Ntanda Nsereko",
@@ -33,6 +37,30 @@ export const metadata: Metadata = {
     "Criminal Law Uganda",
   ],
   authors: [{ name: "Judge Daniel David Ntanda Nsereko" }],
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: "Judge Daniel David Ntanda Nsereko | Public Archive",
+    title: "Judge Daniel David Ntanda Nsereko | Jurist, Professor & Author",
+    description:
+      "The public archive, judicial decisions, treatises, and scholarship of Judge Daniel David Ntanda Nsereko.",
+    images: [
+      {
+        url: "/prof.png",
+        alt: "Judge Daniel David Ntanda Nsereko",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Judge Daniel David Ntanda Nsereko | Public Archive",
+    description:
+      "The public archive, judicial decisions, treatises, and scholarship of Judge Daniel David Ntanda Nsereko.",
+    images: ["/prof.png"],
+  },
   icons: {
     icon: "/icon.png",
   },

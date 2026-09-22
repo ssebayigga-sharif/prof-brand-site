@@ -122,14 +122,16 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                   className="flex flex-col justify-between overflow-hidden rounded-lg border border-[#d9d1c4] bg-white shadow-sm transition hover:border-[#c64e38] hover:shadow-md"
                 >
                   <div>
-                    <div className="relative aspect-4/5 w-full bg-[#16404d]">
-                      <Image
-                        src={book.image}
-                        alt={`Cover of ${book.title}`}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 768px) 100vw, 33vw"
-                      />
+                    <div className="relative aspect-4/5 w-full bg-gradient-to-b from-[#212f2d] via-[#172220] to-[#0f1715] p-5 flex items-center justify-center">
+                      <div className="relative w-full h-full">
+                        <Image
+                          src={book.image}
+                          alt={`Cover of ${book.title}`}
+                          fill
+                          className="object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,0.5)]"
+                          sizes="(max-width: 768px) 100vw, 33vw"
+                        />
+                      </div>
                     </div>
                     <div className="p-6">
                       <div className="flex items-center justify-between text-[10px] font-semibold uppercase tracking-wider text-[#c64e38]">

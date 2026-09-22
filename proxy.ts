@@ -25,7 +25,41 @@ export async function proxy(request: NextRequest) {
     },
   );
 
-  await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  const { pathname } = request.nextUrl;
+
+  // Protected pages restricted to logged-in members only
+  const protectedRoutes = ["/account", "/contact"];
+  const isProtected = protectedRoutes.some(
+    (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`),
+  );
+
+  if (isProtected && !user) {
+    const signUpUrl = new URL("/auth/sign-up", request.url);
+    signUpUrl.searchParams.set("next", pathname);
+    return NextResponse.redirect(signUpUrl);
+  }
+
+  // Strictly protect contact API from unauthenticated email dispatch
+  if (pathname.startsWith("/api/contact") && !user) {
+    return NextResponse.json(
+      {
+        ok: false,
+        error: "Authentication required to contact Professor Nsereko.",
+      },
+      { status: 401 },
+    );
+  }
+
+  // Redirect authenticated members away from sign-in/up pages
+  if (user && (pathname === "/auth/sign-in" || pathname === "/auth/sign-up")) {
+    const nextPath = request.nextUrl.searchParams.get("next") || "/account";
+    return NextResponse.redirect(new URL(nextPath, request.url));
+  }
+
   return response;
 }
 

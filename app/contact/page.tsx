@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 import ContactForm from "@/app/hooks/contact-form";
 import { buildMailto, PROF_EMAIL, topics } from "@/app/lib/contact/topics";
 import { PageHero } from "@/app/components/ui/page-hero";
+import { createClient } from "@/app/lib/supabase/server";
 
 export const metadata: Metadata = {
   title: "Contact & Inquiries | Judge Daniel David Ntanda Nsereko",
@@ -9,7 +11,16 @@ export const metadata: Metadata = {
     "Get in touch with Judge Daniel David Ntanda Nsereko for speaking engagements, research inquiries, books, and academic collaboration.",
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    redirect("/auth/sign-up?next=/contact");
+  }
+
   return (
     <main className="bg-white text-[#17201f]">
       {/* Hero */}
@@ -56,13 +67,24 @@ export default function ContactPage() {
       </section>
 
       {/* Compose Form Section */}
-      <section className="px-6 py-20 sm:px-10 lg:px-[5.5vw]" aria-label="Compose a message">
+      <section
+        className="px-6 py-20 sm:px-10 lg:px-[5.5vw]"
+        aria-label="Compose a message"
+      >
         <div className="mx-auto max-w-3xl">
-          <div className="mb-10 flex flex-col justify-between gap-4 border-b border-[#d9d1c4] pb-6 sm:flex-row sm:items-end">
+          <div className="mb-8 flex flex-col justify-between gap-4 border-b border-[#d9d1c4] pb-6 sm:flex-row sm:items-end">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#c64e38]">
-                Web Form
-              </p>
+              <div className="flex items-center gap-2">
+                <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-0.5 text-[11px] font-semibold text-emerald-800 border border-emerald-200">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  Verified Member Channel
+                </span>
+                {user?.email && (
+                  <span className="text-xs text-[#66706b]">
+                    Signed in as <strong>{user.email}</strong>
+                  </span>
+                )}
+              </div>
               <h2 className="mt-2 font-serif text-3xl font-normal text-[#17201f]">
                 Compose Your Message
               </h2>
@@ -92,7 +114,8 @@ export default function ContactPage() {
               Response Time
             </p>
             <p className="mt-3 text-xs leading-relaxed text-[#66706b]">
-              The Judge reads correspondence personally and endeavors to reply within two to three working days.
+              The Judge reads correspondence personally and endeavors to reply
+              within two to three working days.
             </p>
           </div>
 
@@ -101,7 +124,8 @@ export default function ContactPage() {
               Speaking Details
             </p>
             <p className="mt-3 text-xs leading-relaxed text-[#66706b]">
-              Including event dates, venue location, topic, and organizing entity assists in prompt confirmation.
+              Including event dates, venue location, topic, and organizing
+              entity assists in prompt confirmation.
             </p>
           </div>
 
@@ -110,7 +134,8 @@ export default function ContactPage() {
               Privacy Notice
             </p>
             <p className="mt-3 text-xs leading-relaxed text-[#66706b]">
-              Your contact details are used solely to reply to your inquiry. No marketing lists or public disclosures.
+              Your contact details are used solely to reply to your inquiry. No
+              marketing lists or public disclosures.
             </p>
           </div>
         </div>

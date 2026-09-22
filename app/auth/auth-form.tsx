@@ -7,14 +7,22 @@ import { createClient } from "../lib/supabase/client";
 
 type AuthMode = "sign-in" | "sign-up";
 
-export default function AuthForm({ mode }: { mode: AuthMode }) {
+export default function AuthForm({
+  mode,
+  nextPath = "/account",
+  initialError,
+}: {
+  mode: AuthMode;
+  nextPath?: string;
+  initialError?: string;
+}) {
   const isSignIn = mode === "sign-in";
   const router = useRouter();
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(initialError ?? null);
   const [loading, setLoading] = useState(false);
 
   async function submit(event: React.FormEvent<HTMLFormElement>) {
@@ -31,7 +39,7 @@ export default function AuthForm({ mode }: { mode: AuthMode }) {
           password,
           options: {
             data: { full_name: fullName.trim() },
-            emailRedirectTo: `${window.location.origin}/auth/callback`,
+            emailRedirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(nextPath)}`,
           },
         });
 
@@ -42,7 +50,13 @@ export default function AuthForm({ mode }: { mode: AuthMode }) {
     }
 
     if (isSignIn) {
-      router.push("/account");
+      router.push(nextPath);
+      router.refresh();
+      return;
+    }
+
+    if (result.data.session) {
+      router.push(nextPath);
       router.refresh();
       return;
     }
@@ -112,13 +126,19 @@ export default function AuthForm({ mode }: { mode: AuthMode }) {
           </label>
 
           {error && (
-            <div className="rounded-md border border-red-200 bg-red-50 p-3 text-xs text-red-800" role="alert">
+            <div
+              className="rounded-md border border-red-200 bg-red-50 p-3 text-xs text-red-800"
+              role="alert"
+            >
               {error}
             </div>
           )}
 
           {message && (
-            <div className="rounded-md border border-green-200 bg-green-50 p-3 text-xs text-green-800" role="status">
+            <div
+              className="rounded-md border border-green-200 bg-green-50 p-3 text-xs text-green-800"
+              role="status"
+            >
               {message}
             </div>
           )}
@@ -140,7 +160,7 @@ export default function AuthForm({ mode }: { mode: AuthMode }) {
           {isSignIn ? "Need an account?" : "Already registered?"}{" "}
           <Link
             className="font-semibold text-[#c64e38] underline underline-offset-4"
-            href={isSignIn ? "/auth/sign-up" : "/auth/sign-in"}
+            href={`${isSignIn ? "/auth/sign-up" : "/auth/sign-in"}?next=${encodeURIComponent(nextPath)}`}
           >
             {isSignIn ? "Create one here" : "Sign in here"}
           </Link>

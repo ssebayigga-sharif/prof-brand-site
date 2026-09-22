@@ -1,6 +1,7 @@
 export type Book = {
   id: string;
   image: string;
+  backImage?: string;
   year: string;
   category: "Constitutional Law" | "Criminal Law" | "Memoir" | "Translation" | "Human Rights" | "Legal Ethics" | "Linguistics & Reference";
   title: string;
@@ -70,7 +71,7 @@ export const books: Book[] = [
   },
   {
     id: "eddundiro-lya-bawansolo",
-    image: "/author.png",
+    image: "/wansolo.png",
     year: "2025",
     category: "Translation",
     title: "Eddundiro Lya Bawansolo",
@@ -82,7 +83,7 @@ export const books: Book[] = [
   },
   {
     id: "eddembe-lyaffe",
-    image: "/author.png",
+    image: "/dembe.png",
     year: "2024",
     category: "Human Rights",
     title: "Eddembe Lyaffe",
@@ -94,7 +95,7 @@ export const books: Book[] = [
   },
   {
     id: "ntuuka-e-hague-okuva-e-nabinene",
-    image: "/author.png",
+    image: "/nabinene.png",
     year: "2024",
     category: "Memoir",
     title: "Ntuuka E Hague Okuva E Nabinene",
@@ -133,7 +134,7 @@ export const books: Book[] = [
   },
   {
     id: "twejjukanye-oluganda",
-    image: "/author.png",
+    image: "/twejukanye.png",
     year: "2001",
     category: "Linguistics & Reference",
     title: "Twejjukanye Oluganda [Luganda Language Grammar]",
@@ -146,15 +147,16 @@ export const books: Book[] = [
   },
   {
     id: "english-luganda-law-dictionary",
-    image: "/Const.png",
+    image: "/englug.png",
+    backImage: "/magezi.png",
     year: "1993",
     category: "Linguistics & Reference",
     title: "English - Luganda Law Dictionary",
     edition: "1st Ed. 1993 (4th Edition Forthcoming)",
     description:
       "Pioneering lexicon bridging common law legal terminology with indigenous Luganda vocabulary; indexed in The African Book Publishing Record.",
-    publisher: "University of Botswana",
-    isbn: "99912-0-082-7",
+    publisher: "Magezi Muliro / University of Botswana",
+    isbn: "978-9970-445-56-1 / 99912-0-082-7",
     pages: "149 pages",
     type: "book",
   },
