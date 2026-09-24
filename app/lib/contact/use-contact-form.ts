@@ -23,12 +23,7 @@ const initialFields: ContactFieldValues = {
   company: "",
 };
 
-/**
- * Client-side state for the contact form: field values, submission status,
- * error message, and the POST to /api/contact. Validation happens again on
- * the server (see app/lib/contact/validate.ts) — this only handles UX.
- */
-export function useContactForm(topics: ContactTopic[]) {
+export function useContactForm(topics: readonly ContactTopic[]) {
   const [fields, setFields] = useState<ContactFieldValues>(() => ({
     ...initialFields,
     topicId: topics[0]?.id ?? initialFields.topicId,

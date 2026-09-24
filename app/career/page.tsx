@@ -338,13 +338,13 @@ export default function CareerPage() {
       {/* Section 6: Memberships & Awards */}
       <section
         id="memberships"
-        className="emblem bg-[#16404d] px-6 py-16 text-[#fff8ed] sm:px-10 lg:px-[5.5vw] lg:py-24"
+        className="bg-white px-6 py-16 text-[#17201f] sm:px-10 lg:px-[5.5vw] lg:py-24"
       >
         <div className="max-w-5xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#e6c66a]">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#c64e38]">
             06 / Standing
           </p>
-          <h2 className="mt-4 font-serif text-3xl font-normal leading-tight text-[#fff8ed] sm:text-5xl">
+          <h2 className="mt-4 font-serif text-3xl font-normal leading-tight text-[#17201f] sm:text-5xl">
             Professional Memberships &amp; Editorial Boards
           </h2>
 
@@ -352,42 +352,42 @@ export default function CareerPage() {
             {MEMBERSHIPS.map((mem, idx) => (
               <div
                 key={idx}
-                className="rounded border border-[#fff8ed]/20 bg-[#24312f]/70 p-4 backdrop-blur-sm"
+                className="rounded border border-[#d9d1c4] bg-[#faf6ef] p-4"
               >
-                <span className="text-[10px] font-semibold uppercase tracking-wider text-[#e6c66a]">
+                <span className="text-[10px] font-semibold uppercase tracking-wider text-[#c64e38]">
                   {mem.period}
                 </span>
-                <h4 className="mt-1 text-sm font-semibold text-[#fff8ed]">
+                <h4 className="mt-1 text-sm font-semibold text-[#17201f]">
                   {mem.role}
                 </h4>
-                <p className="mt-1 text-xs text-[#b8c5c1]">
+                <p className="mt-1 text-xs text-[#66706b]">
                   {mem.organization}
                 </p>
               </div>
             ))}
           </div>
 
-          <div className="mt-14 border-t border-[#fff8ed]/20 pt-10">
-            <h3 className="font-serif text-2xl text-[#fff8ed]">
+          <div className="mt-14 border-t border-[#d9d1c4] pt-10">
+            <h3 className="font-serif text-2xl text-[#17201f]">
               Honours &amp; Fellowships
             </h3>
             <div className="mt-6 grid gap-6 sm:grid-cols-2">
               {AWARDS.map((award, idx) => (
                 <div
                   key={idx}
-                  className="rounded border border-[#fff8ed]/20 bg-[#24312f]/40 p-5"
+                  className="rounded border border-[#d9d1c4] bg-[#faf6ef] p-5"
                 >
-                  <span className="text-xs font-semibold text-[#e6c66a]">
+                  <span className="text-xs font-semibold text-[#c64e38]">
                     {award.year}
                   </span>
-                  <h4 className="mt-1 font-serif text-lg text-[#fff8ed]">
+                  <h4 className="mt-1 font-serif text-lg text-[#17201f]">
                     {award.title}
                   </h4>
-                  <p className="mt-1 text-xs font-medium text-[#d8e0dc]">
+                  <p className="mt-1 text-xs font-medium text-[#66706b]">
                     {award.institution} · {award.location}
                   </p>
                   {award.description && (
-                    <p className="mt-2 text-xs text-[#b8c5c1]">
+                    <p className="mt-2 text-xs text-[#66706b]">
                       {award.description}
                     </p>
                   )}

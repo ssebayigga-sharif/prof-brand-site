@@ -41,24 +41,24 @@ export default function Home() {
   return (
     <main className="bg-white text-[#17201f]" id="about">
       {/* Hero Section */}
-      <section className="emblem bg-[#17201f] text-[#fff8ed] pt-20">
+      <section className="emblem bg-white text-[#17201f] pt-20">
         <div className="grid min-h-[calc(100svh-5rem)] items-center gap-10 px-6 py-12 sm:px-10 sm:py-16 lg:grid-cols-[minmax(0,1fr)_minmax(320px,420px)] lg:px-[5.5vw] lg:py-20">
           <div className="max-w-4xl">
             <div className="flex flex-wrap items-center gap-3 mb-6">
-              <span className="rounded-full bg-[#e6c66a]/20 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#e6c66a]">
+              <span className="rounded-full bg-[#c64e38]/15 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#c64e38]">
                 International Jurist &amp; Scholar
               </span>
-              <span className="text-xs font-medium text-[#a9b8b3]">
+              <span className="text-xs font-medium text-[#66706b]">
                 The Hague · Uganda · Botswana
               </span>
             </div>
 
             <h1 className="font-serif text-4xl font-normal leading-[1.04] tracking-normal sm:text-6xl lg:text-7xl xl:text-8xl">
               Judge Daniel David Ntanda{" "}
-              <span className="block text-[#e6c66a]">Nsereko</span>
+              <span className="block text-[#c64e38]">Nsereko</span>
             </h1>
 
-            <p className="mt-8 max-w-2xl text-base leading-relaxed text-[#d8e0dc] sm:text-lg sm:leading-8">
+            <p className="mt-8 max-w-2xl text-base leading-relaxed text-[#66706b] sm:text-lg sm:leading-8">
               A Ugandan scholar, appellate judge, and author whose landmark
               contributions span the International Criminal Court, the Special
               Tribunal for Lebanon, university classrooms across Africa and
@@ -80,7 +80,7 @@ export default function Home() {
 
           <div className="justify-self-center lg:justify-self-end">
             <figure className="max-w-sm">
-              <div className="group relative aspect-4/5 overflow-hidden rounded-md border border-[#fff8ed]/20 bg-[#24312f] shadow-2xl transition duration-500 hover:-translate-y-1">
+              <div className="group relative aspect-4/5 overflow-hidden rounded-md border border-[#d9d1c4] bg-[#f3f4f6] shadow-md transition duration-500 hover:-translate-y-1">
                 <Image
                   src="/prof.png"
                   alt="Judge Daniel David Ntanda Nsereko"
@@ -90,7 +90,7 @@ export default function Home() {
                   sizes="(max-width: 1024px) 80vw, 380px"
                 />
               </div>
-              <figcaption className="mt-5 border-l-2 border-[#e6c66a] pl-4 text-xs leading-relaxed text-[#d8e0dc]">
+              <figcaption className="mt-5 border-l-2 border-[#c64e38] pl-4 text-xs leading-relaxed text-[#66706b]">
                 <strong>Judge Daniel David Ntanda Nsereko</strong>
                 <br />
                 Former Judge, ICC Appeals Division (2007–2012)
@@ -103,7 +103,7 @@ export default function Home() {
       </section>
 
       {/* Stats Bar */}
-      <section className="border-b border-[#d9d1c4] bg-[#faf6ef] px-6 sm:px-10 lg:px-[5.5vw]">
+      <section className="bg-[#faf6ef] px-6 sm:px-10 lg:px-[5.5vw]">
         <div className="grid grid-cols-2 divide-y divide-[#d9d1c4] sm:grid-cols-5 sm:divide-x sm:divide-y-0">
           {STATS.map((stat, idx) => (
             <div key={idx} className="py-6 px-4 first:pl-0 last:pr-0">
@@ -120,11 +120,11 @@ export default function Home() {
 
       {/* 01 / Overview Section */}
       <section
-        className="grid gap-12 bg-white px-6 py-16 sm:px-10 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-16 lg:px-[5.5vw] lg:py-24"
+        className="grid gap-12 border-t border-[#d9d1c4] bg-white px-6 py-16 sm:px-10 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-16 lg:px-[5.5vw] lg:py-24"
         aria-labelledby="about-heading"
       >
-        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#66706b]">
-          01 / Overview
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#c64e38]">
+          Overview
         </p>
         <div>
           <SectionHeading
@@ -169,12 +169,12 @@ export default function Home() {
       {/* 02 / Selected Appointments */}
       <section
         id="career"
-        className="parchment grid gap-12 px-6 py-16 sm:px-10 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-16 lg:px-[5.5vw] lg:py-24"
+        className="parchment grid gap-12 border-t border-[#d9d1c4] px-6 py-16 sm:px-10 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-16 lg:px-[5.5vw] lg:py-24"
         aria-labelledby="career-heading"
       >
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#c64e38]">
-            02 / Appointments
+            Appointments
           </p>
           <h2
             id="career-heading"
@@ -222,10 +222,10 @@ export default function Home() {
 
       {/* 03 / Featured Books */}
       <section
-        className="emblem grid gap-12 bg-[#16404d] px-6 py-16 text-[#fff8ed] sm:px-10 lg:grid-cols-[minmax(300px,400px)_minmax(0,1fr)] lg:gap-16 lg:px-[5.5vw] lg:py-24"
+        className="grid gap-12 border-t border-[#d9d1c4] bg-white px-6 py-16 text-[#17201f] sm:px-10 lg:grid-cols-[minmax(300px,400px)_minmax(0,1fr)] lg:gap-16 lg:px-[5.5vw] lg:py-24"
         aria-labelledby="books-heading"
       >
-        <div className="group relative aspect-3/4 overflow-hidden rounded-md border border-[#fff8ed]/20 bg-linear-to-b from-[#1b2b29] to-[#0f1a18] p-6 shadow-2xl flex items-center justify-center">
+        <div className="group relative aspect-3/4 overflow-hidden rounded-md border border-[#d9d1c4] bg-[#faf6ef] p-6 shadow-md flex items-center justify-center">
           <div className="relative w-full h-full">
             <Image
               src="/author.png"
@@ -238,16 +238,16 @@ export default function Home() {
         </div>
 
         <div className="flex flex-col justify-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#e6c66a]">
-            03 / Published Works
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#c64e38]">
+            Published Works
           </p>
           <h2
             id="books-heading"
-            className="mt-4 font-serif text-3xl font-normal leading-tight text-[#fff8ed] sm:text-5xl lg:text-6xl"
+            className="mt-4 font-serif text-3xl font-normal leading-tight text-[#17201f] sm:text-5xl lg:text-6xl"
           >
             A life in law, written for courts, scholars, and communities.
           </h2>
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-[#d8e0dc] sm:text-lg">
+          <p className="mt-6 max-w-xl text-base leading-relaxed text-[#66706b] sm:text-lg">
             Author of {books.length} major volumes spanning constitutional
             jurisprudence, comparative criminal procedure, memoir, and
             translations into Luganda — connecting legal principle with cultural
@@ -259,9 +259,9 @@ export default function Home() {
               <Link
                 key={b.id}
                 href="/books"
-                className="group flex items-center gap-3 rounded border border-[#fff8ed]/20 bg-[#24312f]/60 p-3 backdrop-blur-sm transition hover:border-[#e6c66a] hover:bg-[#24312f]/90"
+                className="group flex items-center gap-3 rounded border border-[#d9d1c4] bg-[#faf6ef] p-3 transition hover:border-[#c64e38] hover:bg-white"
               >
-                <div className="relative h-14 w-10 shrink-0 overflow-hidden rounded bg-[#162220] p-0.5">
+                <div className="relative h-14 w-10 shrink-0 overflow-hidden rounded bg-[#f3f4f6] p-0.5">
                   <Image
                     src={b.image}
                     alt={b.title}
@@ -271,10 +271,10 @@ export default function Home() {
                   />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <span className="block text-[10px] font-semibold uppercase tracking-wider text-[#e6c66a]">
+                  <span className="block text-[10px] font-semibold uppercase tracking-wider text-[#c64e38]">
                     {b.year} · {b.category}
                   </span>
-                  <h4 className="mt-1 font-serif text-sm leading-snug text-[#fff8ed] truncate group-hover:text-[#e6c66a] transition-colors">
+                  <h4 className="mt-1 font-serif text-sm leading-snug text-[#17201f] truncate group-hover:text-[#c64e38] transition-colors">
                     {b.title}
                   </h4>
                 </div>
@@ -295,7 +295,7 @@ export default function Home() {
 
       {/* 04 / Education & Professional Status */}
       <section
-        className="grid gap-12 bg-[#faf6ef] px-6 py-16 sm:px-10 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-16 lg:px-[5.5vw] lg:py-24"
+        className="grid gap-12 border-t border-[#d9d1c4] bg-[#faf6ef] px-6 py-16 sm:px-10 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-16 lg:px-[5.5vw] lg:py-24"
         aria-labelledby="education-heading"
       >
         <div>
@@ -303,8 +303,8 @@ export default function Home() {
             aria-hidden="true"
             className="mb-4 block h-0.5 w-12 bg-[#c64e38]"
           />
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#66706b]">
-            04 / Foundations
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#c64e38]">
+            Foundations
           </p>
           <h2
             id="education-heading"
@@ -367,7 +367,7 @@ export default function Home() {
       <section className="border-t border-[#d9d1c4] bg-white px-6 py-16 sm:px-10 lg:px-[5.5vw] lg:py-24">
         <div className="max-w-4xl mx-auto">
           <SectionHeading
-            index="05 / Recognition"
+            index="Recognition"
             title="Honours, Fellowships &amp; Service"
             description="Recognized internationally for contributions to international human rights, penal reform, and comparative jurisprudence."
             align="center"
@@ -401,17 +401,17 @@ export default function Home() {
 
       {/* Closing CTA */}
       <section
-        className="emblem bg-[#8e352f] px-6 py-16 text-[#fff8ed] sm:px-10 lg:px-[5.5vw] lg:py-24"
+        className="bg-white px-6 py-16 text-[#17201f] sm:px-10 lg:px-[5.5vw] lg:py-24"
         aria-label="Profile conclusion"
       >
         <div className="max-w-4xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#f4d0c3]">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#c64e38]">
             An Enduring Record
           </p>
           <h2 className="mt-4 font-serif text-3xl font-normal leading-tight sm:text-5xl lg:text-6xl">
             Advancing international justice. Writing for future generations.
           </h2>
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-[#f5ecdd] sm:text-lg">
+          <p className="mt-6 max-w-2xl text-base leading-relaxed text-[#66706b] sm:text-lg">
             Whether inquiring about speaking engagements, academic
             collaborations, or book copies, we welcome your correspondence.
           </p>

@@ -42,7 +42,7 @@ export default function SpeakingPage() {
         title={
           <>
             Advancing the Dialogue on{" "}
-            <em className="text-[#e6c66a] not-italic">Global Justice</em>
+            <em className="text-[#c64e38] not-italic">Global Justice</em>
           </>
         }
         description="Keynote addresses, distinguished university lectures, and judicial seminars delivered across Europe, North America, Africa, and Asia on international humanitarian and criminal law."
@@ -60,7 +60,7 @@ export default function SpeakingPage() {
       </PageHero>
 
       {/* Featured Topics Section */}
-      <section className="border-b border-[#d9d1c4] bg-[#faf6ef] px-6 py-16 sm:px-10 lg:px-[5.5vw] lg:py-20">
+      <section className="border-b border-[#e3e4e8] bg-[#f3f4f6] px-6 py-16 sm:px-10 lg:px-[5.5vw] lg:py-20">
         <div className="max-w-6xl mx-auto">
           <div className="max-w-2xl">
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#c64e38]">
@@ -77,10 +77,7 @@ export default function SpeakingPage() {
                 key={idx}
                 className="rounded-lg border border-[#d9d1c4] bg-white p-6 shadow-sm transition hover:border-[#c64e38]"
               >
-                <span className="font-serif text-2xl font-normal text-[#c64e38]">
-                  0{idx + 1}
-                </span>
-                <h3 className="mt-3 font-serif text-xl text-[#17201f]">
+                <h3 className="font-serif text-xl text-[#17201f]">
                   {topic.title}
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-[#66706b]">
@@ -156,15 +153,15 @@ export default function SpeakingPage() {
       </section>
 
       {/* Speaking Inquiry Process & CTA */}
-      <section className="emblem bg-[#17201f] px-6 py-16 text-[#fff8ed] sm:px-10 lg:px-[5.5vw] lg:py-20">
+      <section className="bg-[#f3f4f6] px-6 py-16 text-[#17201f] sm:px-10 lg:px-[5.5vw] lg:py-20">
         <div className="max-w-4xl mx-auto text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#e6c66a]">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#c64e38]">
             Invitations &amp; Engagements
           </p>
           <h2 className="mt-4 font-serif text-3xl sm:text-5xl">
             Invite Judge Nsereko to Speak
           </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-[#d8e0dc]">
+          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-[#66706b]">
             Please provide event dates, host institution, conference theme, and
             audience profile. All invitations are reviewed personally. An active
             member account is required to send inquiries.

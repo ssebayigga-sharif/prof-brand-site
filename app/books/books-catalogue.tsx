@@ -20,11 +20,17 @@ const categories = [
 export default function BooksCatalogue() {
   const [selectedCategory, setSelectedCategory] = useState("All Categories");
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeSides, setActiveSides] = useState<Record<string, "front" | "back">>({});
+  const [activeSides, setActiveSides] = useState<
+    Record<string, "front" | "back">
+  >({});
   const [modalBook, setModalBook] = useState<Book | null>(null);
   const [modalSide, setModalSide] = useState<"front" | "back">("front");
 
-  const toggleBookSide = (bookId: string, side: "front" | "back", e?: React.MouseEvent) => {
+  const toggleBookSide = (
+    bookId: string,
+    side: "front" | "back",
+    e?: React.MouseEvent,
+  ) => {
     if (e) e.stopPropagation();
     setActiveSides((prev) => ({ ...prev, [bookId]: side }));
   };
@@ -64,7 +70,7 @@ export default function BooksCatalogue() {
   }, [selectedCategory, searchQuery]);
 
   return (
-    <main className="bg-[#faf6ef] text-[#17201f]">
+    <main className="bg-white text-[#17201f]">
       {/* Hero Header */}
       <PageHero
         eyebrow="The Library of Daniel David Ntanda Nsereko"
@@ -140,15 +146,19 @@ export default function BooksCatalogue() {
         </h2>
 
         {filteredBooks.length > 0 ? (
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
             {filteredBooks.map((book: Book, index: number) => {
               const currentSide = activeSides[book.id] ?? "front";
-              const displayedImage = currentSide === "back" && book.backImage ? book.backImage : book.image;
+              const displayedImage =
+                currentSide === "back" && book.backImage
+                  ? book.backImage
+                  : book.image;
 
               return (
                 <article
                   key={book.id}
-                  className="group flex flex-col justify-between overflow-hidden rounded-lg border border-[#d9d1c4] bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-[#c64e38] hover:shadow-xl"
+                  onClick={() => openModal(book)}
+                  className="group flex cursor-pointer flex-col overflow-hidden rounded-lg border border-[#d9d1c4] bg-white p-3 transition duration-300 hover:-translate-y-1 hover:border-[#c64e38]"
                 >
                   <div>
                     {/* Book Image Frame */}
@@ -158,43 +168,51 @@ export default function BooksCatalogue() {
                       onClick={() => openModal(book)}
                       onKeyDown={(e) => e.key === "Enter" && openModal(book)}
                       title={`Click to inspect cover of ${book.title}`}
-                      className="relative aspect-4/5 w-full overflow-hidden bg-gradient-to-b from-[#212f2d] via-[#172220] to-[#0f1715] p-6 flex items-center justify-center cursor-pointer select-none"
+                      className="relative aspect-4/5 w-full overflow-hidden bg-white p-3 flex items-center justify-center cursor-pointer select-none"
                     >
-                      {/* Subtle ambient lighting behind book */}
-                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(255,255,255,0.08),transparent_70%)] pointer-events-none" />
-
                       <div className="relative w-full h-full">
                         <Image
                           src={displayedImage}
                           alt={`${currentSide === "back" ? "Back cover" : "Cover"} of ${book.title}`}
                           fill
-                          className="object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.6)] transition-all duration-500 group-hover:scale-105"
+                          className="object-contain drop-shadow-[0_8px_14px_rgba(164,150,132,0.28)] transition-all duration-500 group-hover:scale-105"
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         />
                       </div>
 
                       {/* Header badges */}
                       <div className="absolute left-3 top-3 flex items-center gap-2">
-                        <span className="rounded-md bg-[#17201f]/85 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-[#e6c66a] backdrop-blur-sm border border-[#e6c66a]/20">
+                        <span className="rounded-md bg-white/90 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-[#16404d] border border-[#d9d1c4]">
                           {book.year}
                         </span>
                         {book.backImage && (
-                          <span className="rounded-md bg-[#c64e38] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-white">
+                          <span className="rounded-md bg-[#16404d] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-white">
                             2 Views
                           </span>
                         )}
                       </div>
 
-                      <span className="absolute right-3 top-3 rounded-md bg-white/90 px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider text-[#17201f] shadow-sm">
-                        0{index + 1}
-                      </span>
-
                       {/* Hover action overlay indicator */}
                       <div className="absolute inset-x-0 bottom-3 flex items-center justify-center pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <span className="rounded-full bg-[#17201f]/90 px-3 py-1 text-[11px] font-medium text-white shadow-lg backdrop-blur-xs border border-white/10 flex items-center gap-1.5">
-                          <svg className="w-3.5 h-3.5 text-[#e6c66a]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        <span className="rounded-full bg-white/95 px-3 py-1 text-[11px] font-medium text-[#17201f] shadow-lg border border-[#d9d1c4] flex items-center gap-1.5">
+                          <svg
+                            className="w-3.5 h-3.5 text-[#c64e38]"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                            />
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                            />
                           </svg>
                           Inspect Cover
                         </span>
@@ -203,7 +221,7 @@ export default function BooksCatalogue() {
                       {/* Front / Back Switcher for books with back cover */}
                       {book.backImage && (
                         <div
-                          className="absolute bottom-3 left-3 z-10 flex rounded-full bg-[#17201f]/90 p-0.5 backdrop-blur-md border border-white/15 shadow-md"
+                          className="absolute bottom-3 left-3 z-10 flex rounded-full bg-white/95 p-0.5 border border-[#d9d1c4] shadow-md"
                           onClick={(e) => e.stopPropagation()}
                         >
                           <button
@@ -212,7 +230,7 @@ export default function BooksCatalogue() {
                             className={`rounded-full px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider transition ${
                               currentSide === "front"
                                 ? "bg-[#e6c66a] text-[#17201f]"
-                                : "text-[#d8e0dc] hover:text-white"
+                                : "text-[#66706b] hover:text-[#17201f]"
                             }`}
                           >
                             Front
@@ -223,7 +241,7 @@ export default function BooksCatalogue() {
                             className={`rounded-full px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider transition ${
                               currentSide === "back"
                                 ? "bg-[#e6c66a] text-[#17201f]"
-                                : "text-[#d8e0dc] hover:text-white"
+                                : "text-[#66706b] hover:text-[#17201f]"
                             }`}
                           >
                             Back
@@ -233,71 +251,19 @@ export default function BooksCatalogue() {
                     </div>
 
                     {/* Book Metadata */}
-                    <div className="p-6">
+                    <div className="pt-4">
                       <div className="flex items-center justify-between gap-2">
                         <span className="text-[10px] font-semibold uppercase tracking-wider text-[#c64e38]">
                           {book.category}
                         </span>
-                        {book.edition && (
-                          <span className="text-[10px] font-medium text-[#66706b]">
-                            {book.edition}
-                          </span>
-                        )}
+                        <span className="text-[10px] font-medium text-[#66706b]">
+                          {book.year}
+                        </span>
                       </div>
-
-                      <h3 className="mt-3 font-serif text-2xl font-normal leading-snug text-[#17201f]">
+                      <h3 className="mt-2 font-serif text-base font-normal leading-snug text-[#17201f]">
                         {book.title}
                       </h3>
-
-                      {book.coauthor && (
-                        <p className="mt-1 text-xs italic text-[#16404d]">
-                          {book.coauthor}
-                        </p>
-                      )}
-
-                      <p className="mt-3 text-xs leading-relaxed text-[#66706b]">
-                        {book.description}
-                      </p>
-
-                      <div className="mt-4 border-t border-[#d9d1c4]/60 pt-3 text-[11px] text-[#66706b] space-y-1">
-                        {book.publisher && (
-                          <p>
-                            <strong className="text-[#17201f]">Publisher:</strong>{" "}
-                            {book.publisher}
-                          </p>
-                        )}
-                        {book.isbn && (
-                          <p>
-                            <strong className="text-[#17201f]">ISBN:</strong>{" "}
-                            {book.isbn}
-                          </p>
-                        )}
-                        {book.pages && (
-                          <p>
-                            <strong className="text-[#17201f]">Length:</strong>{" "}
-                            {book.pages}
-                          </p>
-                        )}
-                      </div>
                     </div>
-                  </div>
-
-                  {/* Footer Action */}
-                  <div className="border-t border-[#d9d1c4]/60 bg-[#faf6ef] p-4 flex items-center gap-2">
-                    <button
-                      type="button"
-                      onClick={() => openModal(book)}
-                      className="rounded-md border border-[#d9d1c4] bg-white px-3 py-2 text-xs font-semibold text-[#17201f] transition hover:border-[#17201f]"
-                      title="Inspect cover in high resolution"
-                    >
-                      Inspect
-                    </button>
-                    <Link
-                      href={`/contact?topic=books&title=${encodeURIComponent(book.title)}`}
-                      className="inline-flex flex-1 items-center justify-center gap-2 rounded-md border border-[#17201f] bg-white px-4 py-2 text-xs font-semibold text-[#17201f] transition hover:bg-[#17201f] hover:text-white"
-                    >
-                      Enquire about this book ↗
-                    </Link>
                   </div>
                 </article>
               );
@@ -332,48 +298,60 @@ export default function BooksCatalogue() {
           role="dialog"
           aria-modal="true"
           aria-label={`Cover preview of ${modalBook.title}`}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 sm:p-6 backdrop-blur-sm animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[#17201f]/80 p-4 sm:p-6 backdrop-blur-sm animate-in fade-in duration-200"
           onClick={closeModal}
         >
           <div
-            className="relative flex max-h-[90vh] w-full max-w-4xl flex-col overflow-hidden rounded-xl bg-[#17201f] text-[#fff8ed] shadow-2xl border border-white/10 md:flex-row"
+            className="relative flex max-h-[90vh] w-full max-w-4xl flex-col overflow-hidden rounded-xl bg-[#faf6ef] text-[#17201f] shadow-xl border border-[#d9d1c4] md:flex-row"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
             <button
               type="button"
               onClick={closeModal}
-              className="absolute right-4 top-4 z-20 rounded-full bg-black/60 p-2 text-white/80 hover:bg-black hover:text-white transition"
+              className="absolute right-4 top-4 z-20 rounded-full border border-[#d9d1c4] bg-white text-[#66706b] hover:text-[#17201f] hover:border-[#17201f] transition"
               aria-label="Close modal"
             >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </button>
 
             {/* Left: High-res Cover Display */}
-            <div className="relative flex flex-1 flex-col items-center justify-center bg-gradient-to-b from-[#111918] to-[#0a0f0e] p-6 sm:p-10 min-h-[350px] md:min-h-[520px]">
-              <div className="relative w-full h-[320px] sm:h-[420px] md:h-[480px]">
-                <Image
-                  src={modalSide === "back" && modalBook.backImage ? modalBook.backImage : modalBook.image}
-                  alt={`${modalSide === "back" ? "Back cover" : "Cover"} of ${modalBook.title}`}
-                  fill
-                  priority
-                  className="object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.85)]"
-                  sizes="(max-width: 768px) 90vw, 480px"
-                />
-              </div>
+            <div className="relative flex flex-1 flex-col items-center justify-center bg-white p-6 sm:p-10 min-h-87.5 md:min-h-130">
+              <Image
+                src={
+                  modalSide === "back" && modalBook.backImage
+                    ? modalBook.backImage
+                    : modalBook.image
+                }
+                alt={`${modalSide === "back" ? "Back cover" : "Cover"} of ${modalBook.title}`}
+                fill
+                priority
+                className="object-contain drop-shadow-[0_12px_20px_rgba(164,150,132,0.35)]"
+                sizes="(max-width: 768px) 90vw, 480px"
+              />
 
               {/* Front/Back toggle in modal */}
               {modalBook.backImage && (
-                <div className="mt-4 flex rounded-full bg-white/10 p-1 backdrop-blur-md border border-white/15">
+                <div className="mt-4 flex rounded-full border border-[#d9d1c4] bg-white p-1 shadow-sm">
                   <button
                     type="button"
                     onClick={() => setModalSide("front")}
                     className={`rounded-full px-4 py-1 text-xs font-semibold uppercase tracking-wider transition ${
                       modalSide === "front"
-                        ? "bg-[#e6c66a] text-[#17201f]"
-                        : "text-[#d8e0dc] hover:text-white"
+                        ? "bg-[#c64e38] text-white"
+                        : "text-[#66706b] hover:text-[#17201f]"
                     }`}
                   >
                     Front Cover
@@ -383,8 +361,8 @@ export default function BooksCatalogue() {
                     onClick={() => setModalSide("back")}
                     className={`rounded-full px-4 py-1 text-xs font-semibold uppercase tracking-wider transition ${
                       modalSide === "back"
-                        ? "bg-[#e6c66a] text-[#17201f]"
-                        : "text-[#d8e0dc] hover:text-white"
+                        ? "bg-[#c64e38] text-white"
+                        : "text-[#66706b] hover:text-[#17201f]"
                     }`}
                   >
                     Back Cover (Magezi Muliro Edition)
@@ -394,55 +372,66 @@ export default function BooksCatalogue() {
             </div>
 
             {/* Right: Book Details & Inquiry */}
-            <div className="flex w-full flex-col justify-between border-t border-white/10 p-6 md:w-[360px] md:border-l md:border-t-0 bg-[#1c2826]">
+            <div className="flex w-full flex-col justify-between border-t border-[#d9d1c4] bg-white p-6 md:w-90 md:border-l md:border-t-0">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="rounded-md bg-[#e6c66a]/20 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[#e6c66a]">
+                  <span className="rounded-md bg-[#c64e38]/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[#c64e38]">
                     {modalBook.category}
                   </span>
-                  <span className="text-xs text-[#a9b8b3]">{modalBook.year}</span>
+                  <span className="text-xs text-[#66706b]">
+                    {modalBook.year}
+                  </span>
                 </div>
 
-                <h3 className="mt-3 font-serif text-2xl font-normal leading-snug text-white">
+                <h3 className="mt-3 font-serif text-2xl font-normal leading-snug text-[#17201f]">
                   {modalBook.title}
                 </h3>
 
                 {modalBook.edition && (
-                  <p className="mt-1 text-xs font-medium text-[#e6c66a]">
+                  <p className="mt-1 text-xs font-medium text-[#c64e38]">
                     {modalBook.edition}
                   </p>
                 )}
 
                 {modalBook.coauthor && (
-                  <p className="mt-1 text-xs italic text-[#d8e0dc]">
+                  <p className="mt-1 text-xs italic text-[#66706b]">
                     {modalBook.coauthor}
                   </p>
                 )}
 
-                <p className="mt-4 text-xs leading-relaxed text-[#a9b8b3]">
+                <p className="mt-4 text-xs leading-relaxed text-[#66706b]">
                   {modalBook.description}
                 </p>
 
-                <div className="mt-6 space-y-2 border-t border-white/10 pt-4 text-xs text-[#d8e0dc]">
+                <div className="mt-6 space-y-2 border-t border-[#d9d1c4] pt-4 text-xs text-[#66706b]">
                   {modalBook.publisher && (
                     <p>
-                      <strong className="text-white">Publisher:</strong> {modalBook.publisher}
+                      <strong className="text-[#17201f]">Publisher:</strong>{" "}
+                      {modalBook.publisher}
                     </p>
                   )}
                   {modalBook.isbn && (
                     <p>
-                      <strong className="text-white">ISBN:</strong> {modalBook.isbn}
+                      <strong className="text-[#17201f]">ISBN:</strong>{" "}
+                      {modalBook.isbn}
                     </p>
                   )}
                   {modalBook.pages && (
                     <p>
-                      <strong className="text-white">Length:</strong> {modalBook.pages}
+                      <strong className="text-[#17201f]">Length:</strong>{" "}
+                      {modalBook.pages}
+                    </p>
+                  )}
+                  {!modalBook.isForthcoming && (
+                    <p className="pt-1 text-[11px] font-medium text-[#16404d]">
+                      <strong className="text-[#17201f]">Where to buy:</strong>{" "}
+                      Aristoc &amp; Uganda Bookshop, Kampala, Uganda
                     </p>
                   )}
                 </div>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-white/10 flex flex-col gap-2">
+              <div className="mt-6 pt-4 border-t border-[#d9d1c4] flex flex-col gap-2">
                 <Link
                   href={`/contact?topic=books&title=${encodeURIComponent(modalBook.title)}`}
                   className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-[#e6c66a] px-4 py-2.5 text-xs font-semibold text-[#17201f] hover:bg-[#f0d882] transition"
@@ -452,7 +441,7 @@ export default function BooksCatalogue() {
                 <button
                   type="button"
                   onClick={closeModal}
-                  className="inline-flex w-full items-center justify-center rounded-md border border-white/20 px-4 py-2 text-xs font-semibold text-white/80 hover:text-white hover:border-white transition"
+                  className="inline-flex w-full items-center justify-center rounded-md border border-[#d9d1c4] bg-white px-4 py-2 text-xs font-semibold text-[#17201f] hover:border-[#17201f] transition"
                 >
                   Close Preview
                 </button>
@@ -463,23 +452,23 @@ export default function BooksCatalogue() {
       )}
 
       {/* Bottom Cross-link to Articles */}
-      <section className="bg-[#16404d] px-6 py-16 text-[#fff8ed] sm:px-10 lg:px-[5.5vw] lg:py-20">
+      <section className="bg-[#f3f4f6] px-6 py-16 text-[#17201f] sm:px-10 lg:px-[5.5vw] lg:py-20">
         <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#e6c66a]">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#c64e38]">
               Beyond Monographs
             </p>
-            <h2 className="mt-3 font-serif text-3xl font-normal text-[#fff8ed] sm:text-4xl">
+            <h2 className="mt-3 font-serif text-3xl font-normal text-[#17201f] sm:text-4xl">
               Explore 65+ Journal Articles &amp; Book Chapters
             </h2>
-            <p className="mt-2 text-xs text-[#b8c5c1]">
+            <p className="mt-2 text-xs text-[#66706b]">
               Commentaries on the Rome Statute, Cardozo review essays, and UN
               reports.
             </p>
           </div>
           <Link
             href="/writing"
-            className="inline-flex items-center gap-2 rounded-md bg-[#e6c66a] px-5 py-3 text-xs font-semibold text-[#17201f] transition hover:bg-[#f0d882]"
+            className="inline-flex items-center gap-2 rounded-md bg-[#17201f] px-5 py-3 text-xs font-semibold text-white transition hover:bg-[#c64e38]"
           >
             Open Writing Archive →
           </Link>

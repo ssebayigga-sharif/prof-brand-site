@@ -62,14 +62,14 @@ export default function AuthForm({
     }
 
     setMessage(
-      "Your account registration is received. Please check your email to verify your address, then sign in.",
+      "Your account registration is received. Please check your email to verify your address. You will be returned here automatically after verification.",
     );
     setPassword("");
     setLoading(false);
   }
 
   return (
-    <main className="min-h-[calc(100svh-5rem)] bg-[#faf6ef] px-6 py-20 text-[#17201f] sm:px-10 lg:px-[5.5vw] lg:py-28">
+    <main className="min-h-[calc(100svh-5rem)] bg-white px-6 py-20 text-[#17201f] sm:px-10 lg:px-[5.5vw] lg:py-28">
       <div className="mx-auto max-w-lg rounded-xl border border-[#d9d1c4] bg-white p-8 shadow-sm sm:p-12">
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#c64e38]">
           {isSignIn ? "Member Portal" : "New Account"}
@@ -88,7 +88,7 @@ export default function AuthForm({
             <label className="block text-xs font-semibold uppercase tracking-wider text-[#66706b]">
               Full Name
               <input
-                className="mt-1.5 w-full rounded-md border border-[#d9d1c4] bg-[#faf6ef] px-4 py-2.5 text-xs text-[#17201f] outline-none transition focus:border-[#c64e38] focus:bg-white focus:ring-2 focus:ring-[#c64e38]/20"
+                className="mt-1.5 w-full rounded-md border border-[#d9d1c4] bg-[#f3f4f6] px-4 py-2.5 text-xs text-[#17201f] outline-none transition focus:border-[#c64e38] focus:bg-white focus:ring-2 focus:ring-[#c64e38]/20"
                 type="text"
                 autoComplete="name"
                 required
@@ -102,7 +102,7 @@ export default function AuthForm({
           <label className="block text-xs font-semibold uppercase tracking-wider text-[#66706b]">
             Email Address
             <input
-              className="mt-1.5 w-full rounded-md border border-[#d9d1c4] bg-[#faf6ef] px-4 py-2.5 text-xs text-[#17201f] outline-none transition focus:border-[#c64e38] focus:bg-white focus:ring-2 focus:ring-[#c64e38]/20"
+              className="mt-1.5 w-full rounded-md border border-[#d9d1c4] bg-[#f3f4f6] px-4 py-2.5 text-xs text-[#17201f] outline-none transition focus:border-[#c64e38] focus:bg-white focus:ring-2 focus:ring-[#c64e38]/20"
               type="email"
               autoComplete="email"
               required
@@ -115,7 +115,7 @@ export default function AuthForm({
           <label className="block text-xs font-semibold uppercase tracking-wider text-[#66706b]">
             Password
             <input
-              className="mt-1.5 w-full rounded-md border border-[#d9d1c4] bg-[#faf6ef] px-4 py-2.5 text-xs text-[#17201f] outline-none transition focus:border-[#c64e38] focus:bg-white focus:ring-2 focus:ring-[#c64e38]/20"
+              className="mt-1.5 w-full rounded-md border border-[#d9d1c4] bg-[#f3f4f6] px-4 py-2.5 text-xs text-[#17201f] outline-none transition focus:border-[#c64e38] focus:bg-white focus:ring-2 focus:ring-[#c64e38]/20"
               type="password"
               autoComplete={isSignIn ? "current-password" : "new-password"}
               minLength={6}

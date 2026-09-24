@@ -1,14 +1,21 @@
 export const PROF_EMAIL = "nserekoddn@gmail.com";
 
+export type ContactTopicId =
+  | "speaking"
+  | "books"
+  | "teaching"
+  | "media"
+  | "general";
+
 export type ContactTopic = {
-  id: string;
+  id: ContactTopicId;
   label: string;
   description: string;
   subject: string;
   bodyIntro: string;
 };
 
-export const topics: ContactTopic[] = [
+export const topics: readonly ContactTopic[] = [
   {
     id: "speaking",
     label: "Speaking",
@@ -47,13 +54,20 @@ export const topics: ContactTopic[] = [
     subject: "General inquiry",
     bodyIntro: "Hello David,",
   },
-];
+] as const;
 
-/** Builds a prefilled mailto: link used as the no-JS / fallback path. */
 export function buildMailto(topic: ContactTopic): string {
   const params = new URLSearchParams({
     subject: `[Site] ${topic.subject}`,
     body: `${topic.bodyIntro}\n\n`,
   });
   return `mailto:${PROF_EMAIL}?${params.toString()}`;
+}
+
+// Guards the crash risk you had with `topics.find(...) ?? topics[0]`
+export function getTopicOrDefault(
+  topicId: string,
+  list: readonly ContactTopic[] = topics,
+): ContactTopic | undefined {
+  return list.find((t) => t.id === topicId) ?? list[0];
 }

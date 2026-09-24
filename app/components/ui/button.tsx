@@ -40,7 +40,7 @@ const variantClasses: Record<ButtonVariant, string> = {
   red:
     "bg-[#c64e38] text-[#fff9ee] hover:-translate-y-0.5 hover:bg-[#a83d2c] focus-visible:ring-[#c64e38]",
   "outline-light":
-    "border border-[#a9b8b3] text-[#fff8ed] hover:-translate-y-0.5 hover:border-[#fff8ed] hover:bg-[#fff8ed] hover:text-[#17201f] focus-visible:ring-[#e6c66a]",
+    "border border-[#a9b8b3] text-[#17201f] hover:-translate-y-0.5 hover:border-[#17201f] hover:bg-[#17201f] hover:text-white focus-visible:ring-[#c64e38]",
   ghost:
     "text-[#17201f] hover:text-[#c64e38] hover:bg-black/5 focus-visible:ring-[#c64e38]",
 };

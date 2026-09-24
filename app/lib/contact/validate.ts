@@ -26,7 +26,7 @@ function asTrimmedString(value: unknown): string {
 
 export function validateContactPayload(
   raw: Record<string, unknown>,
-  topics: ContactTopic[],
+  topics: readonly ContactTopic[],
 ): ValidationResult {
   const name = asTrimmedString(raw.name);
   const email = asTrimmedString(raw.email).toLowerCase();

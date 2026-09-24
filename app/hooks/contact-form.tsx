@@ -13,7 +13,11 @@ const labelClasses =
 const fieldClasses =
   "w-full rounded-md border border-[#d9d1c4] bg-white px-4 py-3 text-sm text-[#17201f] outline-none transition placeholder:text-[#a9b8b3] focus:border-[#c64e38] focus:ring-2 focus:ring-[#c64e38]/20";
 
-export default function ContactForm({ topics }: { topics: ContactTopic[] }) {
+export default function ContactForm({
+  topics,
+}: {
+  topics: readonly ContactTopic[];
+}) {
   const { fields, status, error, setField, submit, reset } =
     useContactForm(topics);
 

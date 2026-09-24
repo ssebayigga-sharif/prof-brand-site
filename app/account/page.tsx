@@ -31,7 +31,7 @@ export default async function AccountPage() {
     profile?.full_name || user.user_metadata.full_name || "Archive Member";
 
   return (
-    <main className="min-h-[calc(100svh-5rem)] bg-[#faf6ef] px-6 py-24 text-[#17201f] sm:px-10 lg:px-[5.5vw] lg:py-32">
+    <main className="min-h-[calc(100svh-5rem)] bg-white px-6 py-24 text-[#17201f] sm:px-10 lg:px-[5.5vw] lg:py-32">
       <div className="mx-auto max-w-4xl">
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#c64e38]">
           Member Portal

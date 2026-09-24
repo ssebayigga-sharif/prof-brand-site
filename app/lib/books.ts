@@ -3,7 +3,14 @@ export type Book = {
   image: string;
   backImage?: string;
   year: string;
-  category: "Constitutional Law" | "Criminal Law" | "Memoir" | "Translation" | "Human Rights" | "Legal Ethics" | "Linguistics & Reference";
+  category:
+    | "Constitutional Law"
+    | "Criminal Law"
+    | "Memoir"
+    | "Translation"
+    | "Human Rights"
+    | "Legal Ethics"
+    | "Linguistics & Reference";
   title: string;
   description: string;
   publisher?: string;
@@ -49,7 +56,7 @@ export const books: Book[] = [
     title: "Criminal Law in Uganda",
     edition: "3rd Edition",
     description:
-      "A leading treatise on substantive criminal law principles, statutory interpretations, jurisprudence, and comparative African criminal jurisprudence.",
+      "A leading treatise on substantive criminal law in Uganda, covering the Uganda Penal Code, statutory interpretation, the elements of criminal responsibility, defenses, and the jurisprudence of the Ugandan courts.",
     publisher: "Wolters Kluwer, The Netherlands",
     isbn: "978-90-654-4937-5",
     pages: "410 pages",
@@ -110,7 +117,7 @@ export const books: Book[] = [
     year: "2004",
     category: "Legal Ethics",
     title: "Legal Ethics in Botswana: Cases and Materials",
-    coauthor: "with K. Solo",
+    coauthor: "with Kholisani Solo",
     description:
       "Essential guide and casebook on professional responsibility, duty of counsel, fiduciary duties to clients, and integrity in the administration of justice.",
     publisher: "University of Botswana Department of Law",
@@ -121,10 +128,10 @@ export const books: Book[] = [
   {
     id: "criminal-procedure-in-botswana",
     image: "/crime.png",
-    year: "2002",
+    year: "1998",
     category: "Criminal Law",
     title: "Criminal Procedure in Botswana: Cases and Materials",
-    edition: "3rd Edition",
+    edition: "2nd Edition",
     description:
       "A comprehensive sourcebook covering police powers, bail, indictments, trial management, evidence rules, and appeals in the courts of Botswana.",
     publisher: "Pula Press, Gaborone",
