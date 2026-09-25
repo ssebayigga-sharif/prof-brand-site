@@ -23,7 +23,7 @@ export function PageHero({
   dark = false,
 }: PageHeroProps) {
   const eyebrowColor = dark ? theme.gold : theme.accent;
-  const bodyColor = dark ? "text-[#d8e0dc]" : theme.textMuted;
+  const bodyColor = dark ? "text-on-dark" : theme.textMuted;
 
   return (
     <section
@@ -45,7 +45,7 @@ export function PageHero({
               <span
                 className={`rounded-full px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${
                   dark
-                    ? "bg-[#e6c66a]/20 text-[#e6c66a]"
+                    ? "bg-gold/20 text-gold"
                     : `${theme.accentBg}/15 ${theme.accent}`
                 }`}
               >
@@ -66,7 +66,7 @@ export function PageHero({
 
         {(asideTitle || asideText) && (
           <div
-            className={`self-end border-l pl-6 lg:mb-2 ${dark ? "border-[#a9b8b3]/30" : theme.border}`}
+            className={`self-end border-l pl-6 lg:mb-2 ${dark ? "border-faint-2/30" : theme.border}`}
           >
             {asideTitle && (
               <p

@@ -34,7 +34,7 @@ const KEYNOTE_TOPICS = [
 
 export default function SpeakingPage() {
   return (
-    <main className="bg-white text-[#17201f]">
+    <main className="bg-background text-ink">
       {/* Page Hero */}
       <PageHero
         eyebrow="Keynotes &amp; Lectures"
@@ -42,7 +42,7 @@ export default function SpeakingPage() {
         title={
           <>
             Advancing the Dialogue on{" "}
-            <em className="text-[#c64e38] not-italic">Global Justice</em>
+            <em className="text-accent not-italic">Global Justice</em>
           </>
         }
         description="Keynote addresses, distinguished university lectures, and judicial seminars delivered across Europe, North America, Africa, and Asia on international humanitarian and criminal law."
@@ -60,13 +60,13 @@ export default function SpeakingPage() {
       </PageHero>
 
       {/* Featured Topics Section */}
-      <section className="border-b border-[#e3e4e8] bg-[#f3f4f6] px-6 py-16 sm:px-10 lg:px-[5.5vw] lg:py-20">
+      <section className="border-b border-line-grey bg-header px-6 py-16 sm:px-10 lg:px-[5.5vw] lg:py-20">
         <div className="max-w-6xl mx-auto">
           <div className="max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#c64e38]">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
               Subject Matter
             </p>
-            <h2 className="mt-2 font-serif text-3xl text-[#17201f] sm:text-4xl">
+            <h2 className="mt-2 font-serif text-3xl text-ink sm:text-4xl">
               Core Lecture &amp; Seminar Themes
             </h2>
           </div>
@@ -75,12 +75,12 @@ export default function SpeakingPage() {
             {KEYNOTE_TOPICS.map((topic, idx) => (
               <div
                 key={idx}
-                className="rounded-lg border border-[#d9d1c4] bg-white p-6 shadow-sm transition hover:border-[#c64e38]"
+                className="rounded-lg border border-line bg-panel p-6 shadow-sm transition hover:border-accent"
               >
-                <h3 className="font-serif text-xl text-[#17201f]">
+                <h3 className="font-serif text-xl text-ink">
                   {topic.title}
                 </h3>
-                <p className="mt-2 text-xs leading-relaxed text-[#66706b]">
+                <p className="mt-2 text-xs leading-relaxed text-muted">
                   {topic.description}
                 </p>
               </div>
@@ -96,54 +96,54 @@ export default function SpeakingPage() {
         aria-labelledby="history-heading"
       >
         <div className="max-w-5xl mx-auto">
-          <div className="flex flex-col justify-between gap-4 border-b border-[#d9d1c4] pb-6 sm:flex-row sm:items-end">
+          <div className="flex flex-col justify-between gap-4 border-b border-line pb-6 sm:flex-row sm:items-end">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#c64e38]">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
                 Lecture Record
               </p>
               <h2
                 id="history-heading"
-                className="mt-2 font-serif text-3xl text-[#17201f] sm:text-4xl"
+                className="mt-2 font-serif text-3xl text-ink sm:text-4xl"
               >
                 Selected Lectures, Addresses &amp; Panel Presentations
               </h2>
             </div>
-            <span className="text-xs font-semibold text-[#66706b]">
+            <span className="text-xs font-semibold text-muted">
               {SPEAKING_ENGAGEMENTS.length} Recorded Addresses
             </span>
           </div>
 
-          <div className="mt-8 divide-y divide-[#d9d1c4]">
+          <div className="mt-8 divide-y divide-line">
             {SPEAKING_ENGAGEMENTS.map((lecture, idx) => (
               <article
                 key={idx}
-                className="py-6 transition hover:bg-[#faf6ef]/70"
+                className="py-6 transition hover:bg-surface/70"
               >
                 <div className="flex flex-wrap items-center gap-3 text-xs">
-                  <span className="font-semibold text-[#c64e38]">
+                  <span className="font-semibold text-accent">
                     {lecture.year}
                   </span>
-                  <span className="text-[#a9b8b3]">·</span>
-                  <span className="text-[#16404d] font-medium">
+                  <span className="text-faint-2">·</span>
+                  <span className="text-navy font-medium">
                     {lecture.location}
                   </span>
                   {lecture.date && (
                     <>
-                      <span className="text-[#a9b8b3]">·</span>
-                      <span className="text-[#66706b]">{lecture.date}</span>
+                      <span className="text-faint-2">·</span>
+                      <span className="text-muted">{lecture.date}</span>
                     </>
                   )}
                 </div>
 
-                <h3 className="mt-2 font-serif text-xl font-normal leading-snug text-[#17201f] sm:text-2xl">
+                <h3 className="mt-2 font-serif text-xl font-normal leading-snug text-ink sm:text-2xl">
                   {lecture.title}
                 </h3>
 
-                <p className="mt-1 text-sm text-[#16404d]">
+                <p className="mt-1 text-sm text-navy">
                   <strong>Event:</strong> {lecture.event}
                 </p>
 
-                <p className="mt-1 text-xs text-[#66706b]">
+                <p className="mt-1 text-xs text-muted">
                   <strong>Organizer / Venue:</strong> {lecture.organizerOrVenue}
                 </p>
               </article>
@@ -153,15 +153,15 @@ export default function SpeakingPage() {
       </section>
 
       {/* Speaking Inquiry Process & CTA */}
-      <section className="bg-[#f3f4f6] px-6 py-16 text-[#17201f] sm:px-10 lg:px-[5.5vw] lg:py-20">
+      <section className="bg-header px-6 py-16 text-ink sm:px-10 lg:px-[5.5vw] lg:py-20">
         <div className="max-w-4xl mx-auto text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#c64e38]">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
             Invitations &amp; Engagements
           </p>
           <h2 className="mt-4 font-serif text-3xl sm:text-5xl">
             Invite Judge Nsereko to Speak
           </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-[#66706b]">
+          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted">
             Please provide event dates, host institution, conference theme, and
             audience profile. All invitations are reviewed personally. An active
             member account is required to send inquiries.

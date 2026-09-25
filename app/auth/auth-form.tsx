@@ -69,15 +69,15 @@ export default function AuthForm({
   }
 
   return (
-    <main className="min-h-[calc(100svh-5rem)] bg-white px-6 py-20 text-[#17201f] sm:px-10 lg:px-[5.5vw] lg:py-28">
-      <div className="mx-auto max-w-lg rounded-xl border border-[#d9d1c4] bg-white p-8 shadow-sm sm:p-12">
-        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#c64e38]">
+    <main className="min-h-[calc(100svh-5rem)] bg-background px-6 py-20 text-ink sm:px-10 lg:px-[5.5vw] lg:py-28">
+      <div className="mx-auto max-w-lg rounded-xl border border-line bg-panel p-8 shadow-sm sm:p-12">
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
           {isSignIn ? "Member Portal" : "New Account"}
         </p>
-        <h1 className="mt-3 font-serif text-3xl font-normal leading-tight text-[#17201f] sm:text-4xl">
+        <h1 className="mt-3 font-serif text-3xl font-normal leading-tight text-ink sm:text-4xl">
           {isSignIn ? "Sign In to the Archive" : "Join the Community"}
         </h1>
-        <p className="mt-3 text-xs leading-relaxed text-[#66706b]">
+        <p className="mt-3 text-xs leading-relaxed text-muted">
           {isSignIn
             ? "Sign in to access your saved references, communicate with the archive, and view your profile."
             : "Create a free account to join the mailing list for forthcoming treatises and academic updates."}
@@ -85,10 +85,10 @@ export default function AuthForm({
 
         <form className="mt-8 space-y-5" onSubmit={submit}>
           {!isSignIn && (
-            <label className="block text-xs font-semibold uppercase tracking-wider text-[#66706b]">
+            <label className="block text-xs font-semibold uppercase tracking-wider text-muted">
               Full Name
               <input
-                className="mt-1.5 w-full rounded-md border border-[#d9d1c4] bg-[#f3f4f6] px-4 py-2.5 text-xs text-[#17201f] outline-none transition focus:border-[#c64e38] focus:bg-white focus:ring-2 focus:ring-[#c64e38]/20"
+                className="mt-1.5 w-full rounded-md border border-line bg-header px-4 py-2.5 text-xs text-ink outline-none transition focus:border-accent focus:bg-panel focus:ring-2 focus:ring-accent/20"
                 type="text"
                 autoComplete="name"
                 required
@@ -99,10 +99,10 @@ export default function AuthForm({
             </label>
           )}
 
-          <label className="block text-xs font-semibold uppercase tracking-wider text-[#66706b]">
+          <label className="block text-xs font-semibold uppercase tracking-wider text-muted">
             Email Address
             <input
-              className="mt-1.5 w-full rounded-md border border-[#d9d1c4] bg-[#f3f4f6] px-4 py-2.5 text-xs text-[#17201f] outline-none transition focus:border-[#c64e38] focus:bg-white focus:ring-2 focus:ring-[#c64e38]/20"
+              className="mt-1.5 w-full rounded-md border border-line bg-header px-4 py-2.5 text-xs text-ink outline-none transition focus:border-accent focus:bg-panel focus:ring-2 focus:ring-accent/20"
               type="email"
               autoComplete="email"
               required
@@ -112,10 +112,10 @@ export default function AuthForm({
             />
           </label>
 
-          <label className="block text-xs font-semibold uppercase tracking-wider text-[#66706b]">
+          <label className="block text-xs font-semibold uppercase tracking-wider text-muted">
             Password
             <input
-              className="mt-1.5 w-full rounded-md border border-[#d9d1c4] bg-[#f3f4f6] px-4 py-2.5 text-xs text-[#17201f] outline-none transition focus:border-[#c64e38] focus:bg-white focus:ring-2 focus:ring-[#c64e38]/20"
+              className="mt-1.5 w-full rounded-md border border-line bg-header px-4 py-2.5 text-xs text-ink outline-none transition focus:border-accent focus:bg-panel focus:ring-2 focus:ring-accent/20"
               type="password"
               autoComplete={isSignIn ? "current-password" : "new-password"}
               minLength={6}
@@ -144,7 +144,7 @@ export default function AuthForm({
           )}
 
           <button
-            className="w-full rounded-md bg-[#17201f] px-6 py-3 text-xs font-semibold uppercase tracking-wider text-[#fff8ed] transition hover:bg-[#c64e38] disabled:cursor-not-allowed disabled:opacity-60"
+            className="w-full rounded-md bg-ink px-6 py-3 text-xs font-semibold uppercase tracking-wider text-inverse transition hover:bg-accent disabled:cursor-not-allowed disabled:opacity-60"
             type="submit"
             disabled={loading}
           >
@@ -156,10 +156,10 @@ export default function AuthForm({
           </button>
         </form>
 
-        <p className="mt-6 text-center text-xs text-[#66706b]">
+        <p className="mt-6 text-center text-xs text-muted">
           {isSignIn ? "Need an account?" : "Already registered?"}{" "}
           <Link
-            className="font-semibold text-[#c64e38] underline underline-offset-4"
+            className="font-semibold text-accent underline underline-offset-4"
             href={`${isSignIn ? "/auth/sign-up" : "/auth/sign-in"}?next=${encodeURIComponent(nextPath)}`}
           >
             {isSignIn ? "Create one here" : "Sign in here"}

@@ -70,7 +70,7 @@ export default function BooksCatalogue() {
   }, [selectedCategory, searchQuery]);
 
   return (
-    <main className="bg-white text-[#17201f]">
+    <main className="bg-background text-ink">
       {/* Hero Header */}
       <PageHero
         eyebrow="The Library of Daniel David Ntanda Nsereko"
@@ -78,7 +78,7 @@ export default function BooksCatalogue() {
         title={
           <>
             Books That Make{" "}
-            <em className="text-[#e6c66a] not-italic">Law Readable</em>
+            <em className="text-gold not-italic">Law Readable</em>
           </>
         }
         description="Treatises on constitutional architecture, leading criminal casebooks, personal memoirs from village Uganda to The Hague, and translations of classic literature into Luganda."
@@ -87,7 +87,7 @@ export default function BooksCatalogue() {
       />
 
       {/* Filter and Search Bar */}
-      <section className="border-b border-[#d9d1c4] bg-white px-6 py-8 sm:px-10 lg:px-[5.5vw]">
+      <section className="border-b border-line bg-background px-6 py-8 sm:px-10 lg:px-[5.5vw]">
         <div className="flex flex-col gap-6">
           {/* Category Filter Pills */}
           <div className="flex flex-wrap gap-2">
@@ -98,8 +98,8 @@ export default function BooksCatalogue() {
                 onClick={() => setSelectedCategory(cat)}
                 className={`rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-wider transition ${
                   selectedCategory === cat
-                    ? "bg-[#c64e38] text-white shadow-sm"
-                    : "border border-[#d9d1c4] bg-[#faf6ef] text-[#66706b] hover:border-[#17201f] hover:text-[#17201f]"
+                    ? "bg-accent text-white shadow-sm"
+                    : "border border-line bg-surface text-muted hover:border-ink hover:text-ink"
                 }`}
               >
                 {cat}
@@ -115,20 +115,20 @@ export default function BooksCatalogue() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search by title, publisher, ISBN, year..."
-                className="w-full rounded-lg border border-[#d9d1c4] bg-white px-4 py-2.5 text-xs text-[#17201f] outline-none transition focus:border-[#c64e38] focus:ring-2 focus:ring-[#c64e38]/20"
+                className="w-full rounded-lg border border-line bg-panel px-4 py-2.5 text-xs text-ink outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/20"
               />
               {searchQuery && (
                 <button
                   type="button"
                   onClick={() => setSearchQuery("")}
-                  className="absolute right-3 top-2.5 text-xs text-[#66706b] hover:text-[#17201f]"
+                  className="absolute right-3 top-2.5 text-xs text-muted hover:text-ink"
                 >
                   ✕
                 </button>
               )}
             </div>
 
-            <p className="text-xs text-[#66706b]">
+            <p className="text-xs text-muted">
               Showing <strong>{filteredBooks.length}</strong> of {books.length}{" "}
               publications
             </p>
@@ -158,7 +158,7 @@ export default function BooksCatalogue() {
                 <article
                   key={book.id}
                   onClick={() => openModal(book)}
-                  className="group flex cursor-pointer flex-col overflow-hidden rounded-lg border border-[#d9d1c4] bg-white p-3 transition duration-300 hover:-translate-y-1 hover:border-[#c64e38]"
+                  className="group flex cursor-pointer flex-col overflow-hidden rounded-lg border border-line bg-panel p-3 transition duration-300 hover:-translate-y-1 hover:border-accent"
                 >
                   <div>
                     {/* Book Image Frame */}
@@ -168,7 +168,7 @@ export default function BooksCatalogue() {
                       onClick={() => openModal(book)}
                       onKeyDown={(e) => e.key === "Enter" && openModal(book)}
                       title={`Click to inspect cover of ${book.title}`}
-                      className="relative aspect-4/5 w-full overflow-hidden bg-white p-3 flex items-center justify-center cursor-pointer select-none"
+                      className="relative aspect-4/5 w-full overflow-hidden bg-panel p-3 flex items-center justify-center cursor-pointer select-none"
                     >
                       <div className="relative w-full h-full">
                         <Image
@@ -182,11 +182,11 @@ export default function BooksCatalogue() {
 
                       {/* Header badges */}
                       <div className="absolute left-3 top-3 flex items-center gap-2">
-                        <span className="rounded-md bg-white/90 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-[#16404d] border border-[#d9d1c4]">
+                        <span className="rounded-md bg-panel/90 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-navy border border-line">
                           {book.year}
                         </span>
                         {book.backImage && (
-                          <span className="rounded-md bg-[#16404d] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-white">
+                          <span className="rounded-md bg-navy px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-white">
                             2 Views
                           </span>
                         )}
@@ -194,9 +194,9 @@ export default function BooksCatalogue() {
 
                       {/* Hover action overlay indicator */}
                       <div className="absolute inset-x-0 bottom-3 flex items-center justify-center pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <span className="rounded-full bg-white/95 px-3 py-1 text-[11px] font-medium text-[#17201f] shadow-lg border border-[#d9d1c4] flex items-center gap-1.5">
+                        <span className="rounded-full bg-panel/95 px-3 py-1 text-[11px] font-medium text-ink shadow-lg border border-line flex items-center gap-1.5">
                           <svg
-                            className="w-3.5 h-3.5 text-[#c64e38]"
+                            className="w-3.5 h-3.5 text-accent"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"
@@ -221,7 +221,7 @@ export default function BooksCatalogue() {
                       {/* Front / Back Switcher for books with back cover */}
                       {book.backImage && (
                         <div
-                          className="absolute bottom-3 left-3 z-10 flex rounded-full bg-white/95 p-0.5 border border-[#d9d1c4] shadow-md"
+                          className="absolute bottom-3 left-3 z-10 flex rounded-full bg-panel/95 p-0.5 border border-line shadow-md"
                           onClick={(e) => e.stopPropagation()}
                         >
                           <button
@@ -229,8 +229,8 @@ export default function BooksCatalogue() {
                             onClick={(e) => toggleBookSide(book.id, "front", e)}
                             className={`rounded-full px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider transition ${
                               currentSide === "front"
-                                ? "bg-[#e6c66a] text-[#17201f]"
-                                : "text-[#66706b] hover:text-[#17201f]"
+                                ? "bg-gold text-ink"
+                                : "text-muted hover:text-ink"
                             }`}
                           >
                             Front
@@ -240,8 +240,8 @@ export default function BooksCatalogue() {
                             onClick={(e) => toggleBookSide(book.id, "back", e)}
                             className={`rounded-full px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider transition ${
                               currentSide === "back"
-                                ? "bg-[#e6c66a] text-[#17201f]"
-                                : "text-[#66706b] hover:text-[#17201f]"
+                                ? "bg-gold text-ink"
+                                : "text-muted hover:text-ink"
                             }`}
                           >
                             Back
@@ -253,14 +253,14 @@ export default function BooksCatalogue() {
                     {/* Book Metadata */}
                     <div className="pt-4">
                       <div className="flex items-center justify-between gap-2">
-                        <span className="text-[10px] font-semibold uppercase tracking-wider text-[#c64e38]">
+                        <span className="text-[10px] font-semibold uppercase tracking-wider text-accent">
                           {book.category}
                         </span>
-                        <span className="text-[10px] font-medium text-[#66706b]">
+                        <span className="text-[10px] font-medium text-muted">
                           {book.year}
                         </span>
                       </div>
-                      <h3 className="mt-2 font-serif text-base font-normal leading-snug text-[#17201f]">
+                      <h3 className="mt-2 font-serif text-base font-normal leading-snug text-ink">
                         {book.title}
                       </h3>
                     </div>
@@ -270,11 +270,11 @@ export default function BooksCatalogue() {
             })}
           </div>
         ) : (
-          <div className="rounded-lg border border-dashed border-[#d9d1c4] bg-white p-12 text-center">
-            <p className="font-serif text-2xl text-[#17201f]">
+          <div className="rounded-lg border border-dashed border-line bg-panel p-12 text-center">
+            <p className="font-serif text-2xl text-ink">
               No books match your criteria.
             </p>
-            <p className="mt-2 text-xs text-[#66706b]">
+            <p className="mt-2 text-xs text-muted">
               Try clearing the search query or selecting &quot;All
               Categories&quot;.
             </p>
@@ -284,7 +284,7 @@ export default function BooksCatalogue() {
                 setSearchQuery("");
                 setSelectedCategory("All Categories");
               }}
-              className="mt-4 rounded-full bg-[#c64e38] px-5 py-2 text-xs font-semibold text-white"
+              className="mt-4 rounded-full bg-accent px-5 py-2 text-xs font-semibold text-white"
             >
               Reset Filters
             </button>
@@ -298,18 +298,18 @@ export default function BooksCatalogue() {
           role="dialog"
           aria-modal="true"
           aria-label={`Cover preview of ${modalBook.title}`}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-[#17201f]/80 p-4 sm:p-6 backdrop-blur-sm animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-ink/80 p-4 sm:p-6 backdrop-blur-sm animate-in fade-in duration-200"
           onClick={closeModal}
         >
           <div
-            className="relative flex max-h-[90vh] w-full max-w-4xl flex-col overflow-hidden rounded-xl bg-[#faf6ef] text-[#17201f] shadow-xl border border-[#d9d1c4] md:flex-row"
+            className="relative flex max-h-[90vh] w-full max-w-4xl flex-col overflow-hidden rounded-xl bg-surface text-ink shadow-xl border border-line md:flex-row"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
             <button
               type="button"
               onClick={closeModal}
-              className="absolute right-4 top-4 z-20 rounded-full border border-[#d9d1c4] bg-white text-[#66706b] hover:text-[#17201f] hover:border-[#17201f] transition"
+              className="absolute right-4 top-4 z-20 rounded-full border border-line bg-panel text-muted hover:text-ink hover:border-ink transition"
               aria-label="Close modal"
             >
               <svg
@@ -328,7 +328,7 @@ export default function BooksCatalogue() {
             </button>
 
             {/* Left: High-res Cover Display */}
-            <div className="relative flex flex-1 flex-col items-center justify-center bg-white p-6 sm:p-10 min-h-87.5 md:min-h-130">
+            <div className="relative flex flex-1 flex-col items-center justify-center bg-panel p-6 sm:p-10 min-h-87.5 md:min-h-130">
               <Image
                 src={
                   modalSide === "back" && modalBook.backImage
@@ -344,14 +344,14 @@ export default function BooksCatalogue() {
 
               {/* Front/Back toggle in modal */}
               {modalBook.backImage && (
-                <div className="mt-4 flex rounded-full border border-[#d9d1c4] bg-white p-1 shadow-sm">
+                <div className="mt-4 flex rounded-full border border-line bg-panel p-1 shadow-sm">
                   <button
                     type="button"
                     onClick={() => setModalSide("front")}
                     className={`rounded-full px-4 py-1 text-xs font-semibold uppercase tracking-wider transition ${
                       modalSide === "front"
-                        ? "bg-[#c64e38] text-white"
-                        : "text-[#66706b] hover:text-[#17201f]"
+                        ? "bg-accent text-white"
+                        : "text-muted hover:text-ink"
                     }`}
                   >
                     Front Cover
@@ -361,8 +361,8 @@ export default function BooksCatalogue() {
                     onClick={() => setModalSide("back")}
                     className={`rounded-full px-4 py-1 text-xs font-semibold uppercase tracking-wider transition ${
                       modalSide === "back"
-                        ? "bg-[#c64e38] text-white"
-                        : "text-[#66706b] hover:text-[#17201f]"
+                        ? "bg-accent text-white"
+                        : "text-muted hover:text-ink"
                     }`}
                   >
                     Back Cover (Magezi Muliro Edition)
@@ -372,76 +372,76 @@ export default function BooksCatalogue() {
             </div>
 
             {/* Right: Book Details & Inquiry */}
-            <div className="flex w-full flex-col justify-between border-t border-[#d9d1c4] bg-white p-6 md:w-90 md:border-l md:border-t-0">
+            <div className="flex w-full flex-col justify-between border-t border-line bg-panel p-6 md:w-90 md:border-l md:border-t-0">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="rounded-md bg-[#c64e38]/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[#c64e38]">
+                  <span className="rounded-md bg-accent/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-accent">
                     {modalBook.category}
                   </span>
-                  <span className="text-xs text-[#66706b]">
+                  <span className="text-xs text-muted">
                     {modalBook.year}
                   </span>
                 </div>
 
-                <h3 className="mt-3 font-serif text-2xl font-normal leading-snug text-[#17201f]">
+                <h3 className="mt-3 font-serif text-2xl font-normal leading-snug text-ink">
                   {modalBook.title}
                 </h3>
 
                 {modalBook.edition && (
-                  <p className="mt-1 text-xs font-medium text-[#c64e38]">
+                  <p className="mt-1 text-xs font-medium text-accent">
                     {modalBook.edition}
                   </p>
                 )}
 
                 {modalBook.coauthor && (
-                  <p className="mt-1 text-xs italic text-[#66706b]">
+                  <p className="mt-1 text-xs italic text-muted">
                     {modalBook.coauthor}
                   </p>
                 )}
 
-                <p className="mt-4 text-xs leading-relaxed text-[#66706b]">
+                <p className="mt-4 text-xs leading-relaxed text-muted">
                   {modalBook.description}
                 </p>
 
-                <div className="mt-6 space-y-2 border-t border-[#d9d1c4] pt-4 text-xs text-[#66706b]">
+                <div className="mt-6 space-y-2 border-t border-line pt-4 text-xs text-muted">
                   {modalBook.publisher && (
                     <p>
-                      <strong className="text-[#17201f]">Publisher:</strong>{" "}
+                      <strong className="text-ink">Publisher:</strong>{" "}
                       {modalBook.publisher}
                     </p>
                   )}
                   {modalBook.isbn && (
                     <p>
-                      <strong className="text-[#17201f]">ISBN:</strong>{" "}
+                      <strong className="text-ink">ISBN:</strong>{" "}
                       {modalBook.isbn}
                     </p>
                   )}
                   {modalBook.pages && (
                     <p>
-                      <strong className="text-[#17201f]">Length:</strong>{" "}
+                      <strong className="text-ink">Length:</strong>{" "}
                       {modalBook.pages}
                     </p>
                   )}
                   {!modalBook.isForthcoming && (
-                    <p className="pt-1 text-[11px] font-medium text-[#16404d]">
-                      <strong className="text-[#17201f]">Where to buy:</strong>{" "}
+                    <p className="pt-1 text-[11px] font-medium text-navy">
+                      <strong className="text-ink">Where to buy:</strong>{" "}
                       Aristoc &amp; Uganda Bookshop, Kampala, Uganda
                     </p>
                   )}
                 </div>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-[#d9d1c4] flex flex-col gap-2">
+              <div className="mt-6 pt-4 border-t border-line flex flex-col gap-2">
                 <Link
                   href={`/contact?topic=books&title=${encodeURIComponent(modalBook.title)}`}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-[#e6c66a] px-4 py-2.5 text-xs font-semibold text-[#17201f] hover:bg-[#f0d882] transition"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-gold px-4 py-2.5 text-xs font-semibold text-ink hover:bg-gold-soft transition"
                 >
                   Enquire about this volume ↗
                 </Link>
                 <button
                   type="button"
                   onClick={closeModal}
-                  className="inline-flex w-full items-center justify-center rounded-md border border-[#d9d1c4] bg-white px-4 py-2 text-xs font-semibold text-[#17201f] hover:border-[#17201f] transition"
+                  className="inline-flex w-full items-center justify-center rounded-md border border-line bg-panel px-4 py-2 text-xs font-semibold text-ink hover:border-ink transition"
                 >
                   Close Preview
                 </button>
@@ -452,23 +452,23 @@ export default function BooksCatalogue() {
       )}
 
       {/* Bottom Cross-link to Articles */}
-      <section className="bg-[#f3f4f6] px-6 py-16 text-[#17201f] sm:px-10 lg:px-[5.5vw] lg:py-20">
+      <section className="bg-header px-6 py-16 text-ink sm:px-10 lg:px-[5.5vw] lg:py-20">
         <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#c64e38]">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
               Beyond Monographs
             </p>
-            <h2 className="mt-3 font-serif text-3xl font-normal text-[#17201f] sm:text-4xl">
+            <h2 className="mt-3 font-serif text-3xl font-normal text-ink sm:text-4xl">
               Explore 65+ Journal Articles &amp; Book Chapters
             </h2>
-            <p className="mt-2 text-xs text-[#66706b]">
+            <p className="mt-2 text-xs text-muted">
               Commentaries on the Rome Statute, Cardozo review essays, and UN
               reports.
             </p>
           </div>
           <Link
             href="/writing"
-            className="inline-flex items-center gap-2 rounded-md bg-[#17201f] px-5 py-3 text-xs font-semibold text-white transition hover:bg-[#c64e38]"
+            className="inline-flex items-center gap-2 rounded-md bg-ink px-5 py-3 text-xs font-semibold text-white transition hover:bg-accent"
           >
             Open Writing Archive →
           </Link>

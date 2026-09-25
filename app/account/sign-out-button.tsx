@@ -28,7 +28,7 @@ export default function SignOutButton() {
   return (
     <div className="mt-8 flex flex-wrap items-center gap-4">
       <button
-        className="inline-flex items-center justify-center rounded-full border border-[#1d2524] px-6 py-3 text-sm font-medium text-[#1d2524] transition hover:-translate-y-0.5 hover:bg-[#1d2524] hover:text-[#f5ecdd] focus:outline-none focus:ring-2 focus:ring-[#c64e38] focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
+        className="inline-flex items-center justify-center rounded-full border border-ink px-6 py-3 text-sm font-medium text-ink transition hover:-translate-y-0.5 hover:bg-ink hover:text-inverse focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
         type="button"
         onClick={signOut}
         disabled={loading}
@@ -36,7 +36,7 @@ export default function SignOutButton() {
         {loading ? "Signing out..." : "Sign out"}
       </button>
       {error && (
-        <p className="text-sm text-[#c64e38]" role="alert">
+        <p className="text-sm text-accent" role="alert">
           {error}
         </p>
       )}

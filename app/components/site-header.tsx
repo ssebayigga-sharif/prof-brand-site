@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { createClient } from "../lib/supabase/client";
+import ThemeToggle from "./theme-toggle";
 
 const navigation = [
   { label: "About", href: "/#about" },
@@ -91,14 +92,14 @@ export default function SiteHeader() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-40 flex h-20 w-full items-center justify-between border-b border-[#e3e4e8] bg-white px-6 backdrop-blur-md transition-all sm:px-10 lg:px-[5.5vw]">
+      <header className="fixed top-0 left-0 right-0 z-40 flex h-20 w-full items-center justify-between border-b border-line-grey bg-header px-6 backdrop-blur-md transition-all sm:px-10 lg:px-[5.5vw]">
         {/* Brand */}
         <Link
           className="group flex items-center gap-3.5 focus-visible:outline-none"
           href="/"
           aria-label="Judge Daniel David Ntanda Nsereko"
         >
-          <div className="relative h-11 w-11 overflow-hidden rounded-full border border-[#e3e4e8] bg-[#f3f4f6] shadow-sm transition duration-300 group-hover:border-[#c64e38]">
+          <div className="relative h-11 w-11 overflow-hidden rounded-full border border-line-grey bg-panel shadow-sm transition duration-300 group-hover:border-accent">
             <Image
               src="/prof.png"
               alt="Judge Nsereko"
@@ -108,10 +109,10 @@ export default function SiteHeader() {
             />
           </div>
           <div className="flex flex-col">
-            <span className="font-serif text-base font-normal tracking-tight text-[#17201f] transition group-hover:text-[#c64e38] sm:text-lg">
+            <span className="font-serif text-base font-normal tracking-tight text-ink transition group-hover:text-accent sm:text-lg">
               Daniel David Ntanda Nsereko
             </span>
-            <span className="text-[10px] font-medium uppercase tracking-[0.14em] text-[#9aa19d]">
+            <span className="text-[10px] font-medium uppercase tracking-[0.14em] text-faint">
               Judge · Professor · Author
             </span>
           </div>
@@ -136,8 +137,8 @@ export default function SiteHeader() {
                 href={item.href}
                 className={`text-xs font-semibold uppercase tracking-[0.12em] transition duration-200 ${
                   isActive
-                    ? "text-[#c64e38]"
-                    : "text-[#66706b] hover:text-[#c64e38]"
+                    ? "text-accent"
+                    : "text-muted hover:text-accent"
                 }`}
               >
                 {item.label}
@@ -148,11 +149,12 @@ export default function SiteHeader() {
 
         {/* Header Search & Account */}
         <div className="hidden items-center gap-4 lg:flex">
+          <ThemeToggle />
           <form
             role="search"
             action="/search"
             method="get"
-            className="flex items-center rounded-full border border-[#d9d1c4] bg-[#f3f4f6] px-3.5 py-1.5 shadow-inner transition focus-within:border-[#c64e38] focus-within:ring-2 focus-within:ring-[#c64e38]/20"
+            className="flex items-center rounded-full border border-line bg-panel px-3.5 py-1.5 shadow-inner transition focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/20"
           >
             <label htmlFor="desktop-site-search" className="sr-only">
               Search the site
@@ -162,12 +164,12 @@ export default function SiteHeader() {
               name="q"
               type="search"
               placeholder="Search archive..."
-              className="w-28 bg-transparent text-xs text-[#17201f] outline-none placeholder:text-[#9aa19d] xl:w-36"
+              className="w-28 bg-transparent text-xs text-ink outline-none placeholder:text-faint xl:w-36"
             />
             <button
               type="submit"
               aria-label="Submit search"
-              className="ml-1 text-xs text-[#c64e38] transition hover:translate-x-0.5 hover:text-[#a83d2c]"
+              className="ml-1 text-xs text-accent transition hover:translate-x-0.5 hover:text-accent-deep"
             >
               ↗
             </button>
@@ -187,7 +189,7 @@ export default function SiteHeader() {
                 aria-expanded={userDropdownOpen}
                 aria-haspopup="true"
                 aria-label="Account details"
-                className="relative flex h-10 w-10 items-center justify-center rounded-full border border-[#d9d1c4] bg-[#f3f4f6] text-xs font-bold text-[#c64e38] shadow-sm transition hover:border-[#c64e38] hover:bg-[#c64e38] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#c64e38] focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+                className="relative flex h-10 w-10 items-center justify-center rounded-full border border-line bg-panel text-xs font-bold text-accent shadow-sm transition hover:border-accent hover:bg-accent hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-white"
               >
                 {userInitial}
                 <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-emerald-500 ring-2 ring-white" />
@@ -195,17 +197,17 @@ export default function SiteHeader() {
 
               {/* Account Dropdown Card */}
               {userDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-64 rounded-xl border border-[#d9d1c4] bg-white p-4 text-[#17201f] shadow-xl z-50">
-                  <div className="border-b border-[#d9d1c4] pb-3">
+                <div className="absolute right-0 mt-2 w-64 rounded-xl border border-line bg-panel p-4 text-ink shadow-xl z-50">
+                  <div className="border-b border-line pb-3">
                     <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#e6c66a] text-sm font-bold text-[#17201f]">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold text-sm font-bold text-ink">
                         {userInitial}
                       </div>
                       <div className="min-w-0 flex-1">
-                        <p className="truncate text-xs font-semibold text-[#17201f]">
+                        <p className="truncate text-xs font-semibold text-ink">
                           {displayName || "Member"}
                         </p>
-                        <p className="truncate text-[11px] text-[#9aa19d]">
+                        <p className="truncate text-[11px] text-faint">
                           {userEmail}
                         </p>
                       </div>
@@ -220,7 +222,7 @@ export default function SiteHeader() {
                     <Link
                       href="/account"
                       onClick={() => setUserDropdownOpen(false)}
-                      className="flex items-center justify-between rounded-md px-3 py-2 text-xs text-[#66706b] transition hover:bg-[#faf6ef] hover:text-[#c64e38]"
+                      className="flex items-center justify-between rounded-md px-3 py-2 text-xs text-muted transition hover:bg-surface hover:text-accent"
                     >
                       <span>Account Portal</span>
                       <span>↗</span>
@@ -228,14 +230,14 @@ export default function SiteHeader() {
                     <Link
                       href="/contact"
                       onClick={() => setUserDropdownOpen(false)}
-                      className="flex items-center justify-between rounded-md px-3 py-2 text-xs text-[#66706b] transition hover:bg-[#faf6ef] hover:text-[#c64e38]"
+                      className="flex items-center justify-between rounded-md px-3 py-2 text-xs text-muted transition hover:bg-surface hover:text-accent"
                     >
                       <span>Direct Message Judge</span>
                       <span>↗</span>
                     </Link>
                   </div>
 
-                  <div className="border-t border-[#d9d1c4] pt-2">
+                  <div className="border-t border-line pt-2">
                     <button
                       type="button"
                       onClick={handleSignOut}
@@ -252,13 +254,13 @@ export default function SiteHeader() {
             <div className="flex items-center gap-3">
               <Link
                 href="/auth/sign-in"
-                className="text-xs font-medium text-[#66706b] transition hover:text-[#c64e38]"
+                className="text-xs font-medium text-muted transition hover:text-accent"
               >
                 Sign in
               </Link>
               <Link
                 href="/auth/sign-up"
-                className="rounded-full border border-[#17201f] px-3.5 py-1.5 text-xs font-semibold text-[#17201f] transition hover:bg-[#17201f] hover:text-white"
+                className="rounded-full border border-ink px-3.5 py-1.5 text-xs font-semibold text-ink transition hover:bg-ink hover:text-inverse"
               >
                 Sign up
               </Link>
@@ -268,7 +270,7 @@ export default function SiteHeader() {
 
         {/* Mobile menu trigger */}
         <button
-          className="flex h-10 w-10 items-center justify-center rounded-md border border-[#d9d1c4] text-[#17201f] transition hover:border-[#c64e38] hover:text-[#c64e38] lg:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-md border border-line text-ink transition hover:border-accent hover:text-accent lg:hidden"
           type="button"
           aria-expanded={menuOpen}
           aria-controls="mobile-navigation"
@@ -300,7 +302,7 @@ export default function SiteHeader() {
         aria-modal="true"
         aria-hidden={!menuOpen}
         inert={!menuOpen}
-        className={`fixed top-20 right-0 z-50 flex h-[calc(100dvh-5rem)] w-full max-w-sm flex-col justify-between border-l border-[#d9d1c4] bg-white p-6 text-[#17201f] shadow-2xl transition-transform duration-300 ease-in-out lg:hidden ${
+        className={`fixed top-20 right-0 z-50 flex h-[calc(100dvh-5rem)] w-full max-w-sm flex-col justify-between border-l border-line bg-background p-6 text-ink shadow-2xl transition-transform duration-300 ease-in-out lg:hidden ${
           menuOpen
             ? "visible translate-x-0"
             : "invisible pointer-events-none translate-x-full"
@@ -311,7 +313,7 @@ export default function SiteHeader() {
             role="search"
             action="/search"
             method="get"
-            className="flex items-center rounded-full border border-[#d9d1c4] bg-[#f3f4f6] px-4 py-2"
+            className="flex items-center rounded-full border border-line bg-panel px-4 py-2"
           >
             <label htmlFor="mobile-site-search" className="sr-only">
               Search the site
@@ -321,19 +323,19 @@ export default function SiteHeader() {
               name="q"
               type="search"
               placeholder="Search books, articles, cases..."
-              className="w-full bg-transparent text-sm text-[#17201f] outline-none placeholder:text-[#9aa19d]"
+              className="w-full bg-transparent text-sm text-ink outline-none placeholder:text-faint"
             />
             <button
               type="submit"
               aria-label="Search"
-              className="text-sm font-semibold text-[#c64e38]"
+              className="text-sm font-semibold text-accent"
             >
               ↗
             </button>
           </form>
 
           <nav
-            className="flex flex-col divide-y divide-[#d9d1c4]"
+            className="flex flex-col divide-y divide-line"
             aria-label="Mobile Navigation"
           >
             {navigation.map((item) => (
@@ -341,7 +343,7 @@ export default function SiteHeader() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setMenuOpen(false)}
-                className="flex items-center justify-between py-3.5 font-serif text-2xl font-normal transition hover:text-[#c64e38]"
+                className="flex items-center justify-between py-3.5 font-serif text-2xl font-normal transition hover:text-accent"
               >
                 {item.label}
               </Link>
@@ -349,14 +351,18 @@ export default function SiteHeader() {
           </nav>
         </div>
 
-        <div className="border-t border-[#d9d1c4] pt-6">
-          <div className="flex flex-wrap items-center gap-4 text-sm">
+        <div className="border-t border-line pt-6">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-medium text-muted">Appearance</span>
+            <ThemeToggle />
+          </div>
+          <div className="mt-4 flex flex-wrap items-center gap-4 text-sm">
             {userEmail ? (
               <div className="flex w-full items-center justify-between">
                 <Link
                   href="/account"
                   onClick={() => setMenuOpen(false)}
-                  className="font-medium text-[#c64e38]"
+                  className="font-medium text-accent"
                 >
                   My Account ({userEmail.split("@")[0]})
                 </Link>
@@ -373,21 +379,21 @@ export default function SiteHeader() {
                 <Link
                   href="/auth/sign-in"
                   onClick={() => setMenuOpen(false)}
-                  className="text-[#66706b] hover:text-[#c64e38]"
+                  className="text-muted hover:text-accent"
                 >
                   Sign in
                 </Link>
                 <Link
                   href="/auth/sign-up"
                   onClick={() => setMenuOpen(false)}
-                  className="rounded-full border border-[#c64e38] px-3 py-1 text-xs font-semibold text-[#c64e38]"
+                  className="rounded-full border border-accent px-3 py-1 text-xs font-semibold text-accent"
                 >
                   Sign up
                 </Link>
               </>
             )}
           </div>
-          <p className="mt-4 text-xs text-[#9aa19d]">
+          <p className="mt-4 text-xs text-faint">
             Judge Daniel David Ntanda Nsereko · Public Archive
           </p>
         </div>

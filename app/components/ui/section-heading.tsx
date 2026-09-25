@@ -26,7 +26,7 @@ export function SectionHeading({
       {index && (
         <p
           className={`text-xs font-semibold uppercase tracking-[0.16em] mb-3 ${
-            dark ? "text-[#e6c66a]" : "text-[#c64e38]"
+            dark ? "text-gold" : "text-accent"
           }`}
         >
           {index}
@@ -34,7 +34,7 @@ export function SectionHeading({
       )}
       <h2
         className={`font-serif text-3xl font-normal leading-tight tracking-normal sm:text-4xl lg:text-5xl ${
-          dark ? "text-[#fff8ed]" : "text-[#17201f]"
+          dark ? "text-inverse" : "text-ink"
         }`}
       >
         {title}
@@ -42,7 +42,7 @@ export function SectionHeading({
       {description && (
         <p
           className={`mt-5 text-base leading-7 sm:text-lg sm:leading-8 ${
-            dark ? "text-[#d8e0dc]" : "text-[#66706b]"
+            dark ? "text-on-dark" : "text-muted"
           }`}
         >
           {description}

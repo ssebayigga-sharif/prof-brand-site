@@ -8,10 +8,10 @@ import {
 } from "@/app/lib/contact/topics";
 
 const labelClasses =
-  "mb-1.5 block text-xs font-semibold uppercase tracking-[0.14em] text-[#66706b]";
+  "mb-1.5 block text-xs font-semibold uppercase tracking-[0.14em] text-muted";
 
 const fieldClasses =
-  "w-full rounded-md border border-[#d9d1c4] bg-white px-4 py-3 text-sm text-[#17201f] outline-none transition placeholder:text-[#a9b8b3] focus:border-[#c64e38] focus:ring-2 focus:ring-[#c64e38]/20";
+  "w-full rounded-md border border-line bg-panel px-4 py-3 text-sm text-ink outline-none transition placeholder:text-faint-2 focus:border-accent focus:ring-2 focus:ring-accent/20";
 
 export default function ContactForm({
   topics,
@@ -34,21 +34,21 @@ export default function ContactForm({
       <div
         role="status"
         aria-live="polite"
-        className="rounded-lg border border-[#d9d1c4] bg-white p-8 shadow-sm"
+        className="rounded-lg border border-line bg-panel p-8 shadow-sm"
       >
         <div className="flex items-center gap-3">
           <span className="flex h-8 w-8 items-center justify-center rounded-full bg-green-100 text-green-700">
             ✓
           </span>
-          <p className="font-serif text-2xl text-[#17201f]">Message Delivered</p>
+          <p className="font-serif text-2xl text-ink">Message Delivered</p>
         </div>
-        <p className="mt-4 text-sm leading-relaxed text-[#66706b]">
+        <p className="mt-4 text-sm leading-relaxed text-muted">
           Thank you for reaching out. Your message has been routed to {PROF_EMAIL}. Judge Nsereko reads correspondence personally and endeavors to reply within two to three days.
         </p>
         <button
           type="button"
           onClick={reset}
-          className="mt-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#c64e38] underline underline-offset-4 hover:text-[#a83d2c]"
+          className="mt-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-accent underline underline-offset-4 hover:text-accent-deep"
         >
           ← Send another message
         </button>
@@ -119,7 +119,7 @@ export default function ContactForm({
           <label className={labelClasses} htmlFor="contact-message">
             Message *
           </label>
-          <span className="text-[11px] text-[#66706b]">
+          <span className="text-[11px] text-muted">
             {fields.message.length}/5000 characters
           </span>
         </div>
@@ -158,13 +158,13 @@ export default function ContactForm({
         <div
           role="status"
           aria-live="polite"
-          className="rounded-md border-l-4 border-[#c64e38] bg-red-50 p-4 text-xs leading-relaxed text-red-900"
+          className="rounded-md border-l-4 border-accent bg-red-50 p-4 text-xs leading-relaxed text-red-900"
         >
           <p className="font-semibold">{error}</p>
           <p className="mt-1">
             Alternatively, you can{" "}
             <a
-              className="font-semibold underline hover:text-[#c64e38]"
+              className="font-semibold underline hover:text-accent"
               href={
                 selectedTopic
                   ? buildMailto(selectedTopic)
@@ -181,12 +181,12 @@ export default function ContactForm({
         <button
           type="submit"
           disabled={status === "sending"}
-          className="inline-flex items-center justify-center gap-2 rounded-md bg-[#17201f] px-6 py-3 text-xs font-semibold uppercase tracking-wider text-[#fff8ed] transition hover:bg-[#c64e38] focus:outline-none focus:ring-2 focus:ring-[#c64e38] disabled:cursor-not-allowed disabled:opacity-60"
+          className="inline-flex items-center justify-center gap-2 rounded-md bg-ink px-6 py-3 text-xs font-semibold uppercase tracking-wider text-inverse transition hover:bg-accent focus:outline-none focus:ring-2 focus:ring-accent disabled:cursor-not-allowed disabled:opacity-60"
         >
           {status === "sending" ? "Transmitting..." : "Send Message"}
           <span aria-hidden="true">↗</span>
         </button>
-        <p className="text-xs text-[#66706b]">
+        <p className="text-xs text-muted">
           Messages are dispatched directly to the Judge&apos;s personal inbox.
         </p>
       </div>

@@ -32,17 +32,17 @@ export type ButtonProps = AsButtonProps | AsLinkProps;
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    "bg-[#e6c66a] text-[#17201f] shadow-sm hover:-translate-y-0.5 hover:bg-[#f0d882] focus-visible:ring-[#e6c66a]",
+    "bg-gold text-ink shadow-sm hover:-translate-y-0.5 hover:bg-gold-soft focus-visible:ring-gold",
   secondary:
-    "border border-[#17201f] text-[#17201f] hover:-translate-y-0.5 hover:bg-[#17201f] hover:text-[#fff8ed] focus-visible:ring-[#17201f]",
+    "border border-ink text-ink hover:-translate-y-0.5 hover:bg-ink hover:text-inverse focus-visible:ring-ink",
   dark:
-    "bg-[#17201f] text-[#fff8ed] hover:-translate-y-0.5 hover:bg-[#263533] focus-visible:ring-[#17201f]",
+    "bg-surface-dark text-inverse hover:-translate-y-0.5 hover:bg-header focus-visible:ring-ink",
   red:
-    "bg-[#c64e38] text-[#fff9ee] hover:-translate-y-0.5 hover:bg-[#a83d2c] focus-visible:ring-[#c64e38]",
+    "bg-accent text-inverse hover:-translate-y-0.5 hover:bg-accent-deep focus-visible:ring-accent",
   "outline-light":
-    "border border-[#a9b8b3] text-[#17201f] hover:-translate-y-0.5 hover:border-[#17201f] hover:bg-[#17201f] hover:text-white focus-visible:ring-[#c64e38]",
+    "border border-faint-2 text-ink hover:-translate-y-0.5 hover:border-ink hover:bg-ink hover:text-white focus-visible:ring-accent",
   ghost:
-    "text-[#17201f] hover:text-[#c64e38] hover:bg-black/5 focus-visible:ring-[#c64e38]",
+    "text-ink hover:text-accent hover:bg-ink/10 focus-visible:ring-accent",
 };
 
 const sizeClasses: Record<ButtonSize, string> = {

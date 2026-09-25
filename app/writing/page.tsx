@@ -11,13 +11,13 @@ export const metadata: Metadata = {
 
 export default function WritingPage() {
   return (
-    <main className="bg-white text-[#17201f]">
+    <main className="bg-background text-ink">
       <PageHero
         eyebrow="Bibliography &amp; Scholarship"
         badge="100+ Works"
         title={
           <>
-            Ideas That Travel <em className="text-[#e6c66a] not-italic">Across Borders</em>
+            Ideas That Travel <em className="text-gold not-italic">Across Borders</em>
           </>
         }
         description="Treatises, commentaries, judicial scholarship, and indigenous translations examining international criminal jurisdiction, victim rights, constitutional governance, and the rule of law."
@@ -29,15 +29,15 @@ export default function WritingPage() {
       <WritingExplorer />
 
       {/* CTA Section */}
-      <section className="border-t border-[#d9d1c4] bg-[#faf6ef] px-6 py-16 text-center sm:px-10 lg:px-[5.5vw] lg:py-20">
+      <section className="border-t border-line bg-surface px-6 py-16 text-center sm:px-10 lg:px-[5.5vw] lg:py-20">
         <div className="max-w-2xl mx-auto">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#c64e38]">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
             Scholarly Correspondence
           </p>
-          <h2 className="mt-3 font-serif text-3xl text-[#17201f] sm:text-4xl">
+          <h2 className="mt-3 font-serif text-3xl text-ink sm:text-4xl">
             Research Inquiries &amp; Academic Synergies
           </h2>
-          <p className="mt-4 text-sm leading-relaxed text-[#66706b]">
+          <p className="mt-4 text-sm leading-relaxed text-muted">
             For inquiries regarding citations, book copies, translation projects, or scholarly consultations, please reach out directly.
           </p>
           <div className="mt-8 flex justify-center gap-4">

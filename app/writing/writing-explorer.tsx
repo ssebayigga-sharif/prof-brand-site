@@ -59,7 +59,7 @@ export default function WritingExplorer() {
   return (
     <div className="mx-auto max-w-6xl px-6 py-12 sm:px-10 lg:px-[5.5vw]">
       {/* Controls Bar: Tabs, Search, Topic Filter */}
-      <div className="flex flex-col gap-6 border-b border-[#d9d1c4] pb-8">
+      <div className="flex flex-col gap-6 border-b border-line pb-8">
         {/* Navigation Tabs */}
         <div className="flex flex-wrap gap-2">
           {[
@@ -75,8 +75,8 @@ export default function WritingExplorer() {
               onClick={() => setActiveTab(tab.id as TabType)}
               className={`rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-wider transition ${
                 activeTab === tab.id
-                  ? "bg-[#17201f] text-[#fff8ed] shadow-sm"
-                  : "border border-[#d9d1c4] bg-[#faf6ef] text-[#66706b] hover:border-[#17201f] hover:text-[#17201f]"
+                  ? "bg-ink text-inverse shadow-sm"
+                  : "border border-line bg-surface text-muted hover:border-ink hover:text-ink"
               }`}
             >
               {tab.label}
@@ -92,13 +92,13 @@ export default function WritingExplorer() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Filter by title, journal, topic, year, or keyword..."
-              className="w-full rounded-lg border border-[#d9d1c4] bg-white px-4 py-3 text-sm text-[#17201f] outline-none transition focus:border-[#c64e38] focus:ring-2 focus:ring-[#c64e38]/20"
+              className="w-full rounded-lg border border-line bg-panel px-4 py-3 text-sm text-ink outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/20"
             />
             {searchQuery && (
               <button
                 type="button"
                 onClick={() => setSearchQuery("")}
-                className="absolute right-3 top-3 text-xs text-[#66706b] hover:text-[#17201f]"
+                className="absolute right-3 top-3 text-xs text-muted hover:text-ink"
               >
                 Clear ✕
               </button>
@@ -108,7 +108,7 @@ export default function WritingExplorer() {
           <select
             value={selectedTopic}
             onChange={(e) => setSelectedTopic(e.target.value)}
-            className="rounded-lg border border-[#d9d1c4] bg-white px-4 py-3 text-xs font-medium text-[#17201f] outline-none transition focus:border-[#c64e38]"
+            className="rounded-lg border border-line bg-panel px-4 py-3 text-xs font-medium text-ink outline-none transition focus:border-accent"
           >
             {topics.map((t) => (
               <option key={t} value={t}>
@@ -123,39 +123,39 @@ export default function WritingExplorer() {
       {activeTab === "books" ? (
         <div className="mt-10">
           <div className="mb-6 flex items-center justify-between">
-            <h3 className="font-serif text-2xl text-[#17201f]">
+            <h3 className="font-serif text-2xl text-ink">
               Books, Monographs &amp; Lexicons ({books.length})
             </h3>
             <Link
               href="/books"
-              className="text-xs font-semibold uppercase tracking-wider text-[#c64e38] hover:underline"
+              className="text-xs font-semibold uppercase tracking-wider text-accent hover:underline"
             >
               View Catalogue Cards →
             </Link>
           </div>
-          <div className="divide-y divide-[#d9d1c4]">
+          <div className="divide-y divide-line">
             {books.map((b) => (
               <article key={b.id} className="py-6">
                 <div className="flex flex-wrap items-center gap-3 text-xs">
-                  <span className="font-semibold text-[#c64e38]">{b.year}</span>
-                  <span className="text-[#a9b8b3]">·</span>
-                  <span className="rounded-full bg-[#16404d]/10 px-2.5 py-0.5 text-[10px] font-medium uppercase text-[#16404d]">
+                  <span className="font-semibold text-accent">{b.year}</span>
+                  <span className="text-faint-2">·</span>
+                  <span className="rounded-full bg-navy/10 px-2.5 py-0.5 text-[10px] font-medium uppercase text-navy">
                     {b.category}
                   </span>
                   {b.edition && (
-                    <span className="text-xs italic text-[#66706b]">({b.edition})</span>
+                    <span className="text-xs italic text-muted">({b.edition})</span>
                   )}
                 </div>
-                <h4 className="mt-2 font-serif text-2xl text-[#17201f]">
+                <h4 className="mt-2 font-serif text-2xl text-ink">
                   {b.title}
                 </h4>
                 {b.coauthor && (
-                  <p className="mt-1 text-xs text-[#66706b]">{b.coauthor}</p>
+                  <p className="mt-1 text-xs text-muted">{b.coauthor}</p>
                 )}
-                <p className="mt-2 text-sm leading-relaxed text-[#66706b]">
+                <p className="mt-2 text-sm leading-relaxed text-muted">
                   {b.description}
                 </p>
-                <div className="mt-2 text-xs text-[#a9b8b3]">
+                <div className="mt-2 text-xs text-faint-2">
                   {b.publisher} {b.isbn && `· ISBN: ${b.isbn}`} {b.pages && `· ${b.pages}`}
                 </div>
               </article>
@@ -164,7 +164,7 @@ export default function WritingExplorer() {
         </div>
       ) : (
         <div className="mt-8">
-          <div className="mb-6 flex items-center justify-between text-xs text-[#66706b]">
+          <div className="mb-6 flex items-center justify-between text-xs text-muted">
             <span>
               Showing {filteredPublications.length} publication{filteredPublications.length === 1 ? "" : "s"}
               {searchQuery && ` matching "${searchQuery}"`}
@@ -173,15 +173,15 @@ export default function WritingExplorer() {
           </div>
 
           {filteredPublications.length > 0 ? (
-            <div className="divide-y divide-[#d9d1c4]">
+            <div className="divide-y divide-line">
               {filteredPublications.map((pub) => (
                 <PublicationItemCard key={pub.id} publication={pub} />
               ))}
             </div>
           ) : (
-            <div className="rounded-lg border border-dashed border-[#d9d1c4] bg-[#faf6ef] p-12 text-center">
-              <p className="font-serif text-2xl text-[#17201f]">No publications found</p>
-              <p className="mt-2 text-xs text-[#66706b]">
+            <div className="rounded-lg border border-dashed border-line bg-surface p-12 text-center">
+              <p className="font-serif text-2xl text-ink">No publications found</p>
+              <p className="mt-2 text-xs text-muted">
                 Try adjusting your search terms or clearing the topic filter.
               </p>
               <button
@@ -190,7 +190,7 @@ export default function WritingExplorer() {
                   setSearchQuery("");
                   setSelectedTopic("All Topics");
                 }}
-                className="mt-4 rounded-full bg-[#c64e38] px-4 py-2 text-xs font-semibold text-white"
+                className="mt-4 rounded-full bg-accent px-4 py-2 text-xs font-semibold text-white"
               >
                 Reset Filters
               </button>
